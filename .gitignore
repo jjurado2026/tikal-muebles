@@ -3,6 +3,9 @@
 # Este repositorio es PÚBLICO (GitHub Pages lo exige en cuenta gratuita).
 _interno/
 
+# Vistas parciales de trabajo (montar.mjs --vista): no forman parte del prototipo
+prototype/_vista-*.html
+
 # ── Sistema ──────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
