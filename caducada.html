@@ -7,11 +7,11 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0f131f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230f131f'/%3E%3Cpath d='M10 7h12v3H10zM13 10h6v4h-6zM8 16h16v2H8zM6 20h20v2H6zM4 24h24v3H4z' fill='%23fff'/%3E%3C/svg%3E">
-<link rel="preload" href="assets/fonts/hepta-slab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/gloock-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  /* Aviso de propuesta caducada: la home entera, sobre las terrazas de su templo, ya fuera de alcance */
-  @font-face { font-family: 'Hepta Slab'; src: url('assets/fonts/hepta-slab.woff2') format('woff2'); font-weight: 500 800; font-display: swap; }
-  @font-face { font-family: 'Hanken Grotesk'; src: url('assets/fonts/hanken-grotesk.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
+  /* Aviso de propuesta caducada: la home entera, en su marco, ya fuera de alcance */
+  @font-face { font-family: 'Gloock'; src: url('assets/fonts/gloock-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Manrope'; src: url('assets/fonts/manrope.woff2') format('woff2'); font-weight: 300 800; font-display: swap; }
   :root {
     --noche: #0f131f; --noche-2: #1c2130; --noche-3: #2b3242; --basalto: #35415b; --pizarra: #727f9f; --cal: #e3e7f0; --blanco: #fff; --led: #f3d9a4;
     --margen: clamp(20px, 5vw, 72px);
@@ -20,42 +20,42 @@
     --alto: min(58svh, 540px);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; background: radial-gradient(70% 60% at 70% 75%, rgba(53, 65, 91, .45), transparent 70%), var(--noche); color: var(--cal); font: 400 17px/1.7 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  body { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; background: radial-gradient(70% 60% at 70% 75%, rgba(53, 65, 91, .45), transparent 70%), var(--noche); color: var(--cal); font: 400 17px/1.7 'Manrope', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
   img, svg { display: block; max-width: 100%; }
   .cab { padding: clamp(18px, 3svh, 28px) var(--margen) 0; }
   .cab svg { height: clamp(40px, 5svh, 56px); width: auto; fill: var(--blanco); }
   .aviso { width: 100%; max-width: calc(1180px + 2 * var(--margen)); margin-inline: auto; padding: clamp(32px, 6svh, 72px) var(--margen) clamp(40px, 7svh, 80px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(44px, 7svh, 64px); align-items: center; }
   .texto { display: grid; gap: clamp(26px, 4svh, 40px); justify-items: start; }
-  h1 { font: 700 clamp(30px, 1.2rem + 2.6vw, 54px)/1.12 'Hepta Slab', Rockwell, Georgia, serif; color: var(--blanco); max-width: 20ch; text-wrap: balance; }
+  h1 { font: 400 clamp(30px, 1.2rem + 2.6vw, 56px)/1.1 'Gloock', Georgia, serif; color: var(--blanco); max-width: 20ch; text-wrap: balance; }
   .mas { font-size: clamp(18px, 1rem + .5vw, 22px); color: var(--cal); max-width: 34em; }
   .mas a { color: var(--blanco); font-weight: 700; text-decoration-color: var(--led); text-underline-offset: .18em; overflow-wrap: anywhere; }
   .mas a:hover { color: var(--led); }
   .mas a:focus-visible { outline: 2px solid var(--cal); outline-offset: 3px; }
-  /* El botón sube un cuerpo, como en la home */
-  .btn { position: relative; display: inline-flex; isolation: isolate; text-decoration: none; font: 600 16px/1.1 'Hanken Grotesk', system-ui, sans-serif; }
-  .btn::before { content: ""; position: absolute; inset: 5px -4px -5px; z-index: -1; border-radius: 3px; background: var(--pizarra); transition: transform .55s var(--muelle); }
-  .btn span { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 3px; background: var(--cal); color: var(--noche); transition: transform .55s var(--muelle), background-color .2s ease; }
+  /* La píldora de la home: al pasar, la luz cálida entra barriendo */
+  .btn { position: relative; display: inline-flex; isolation: isolate; overflow: hidden; border-radius: 999px; text-decoration: none; font: 700 16px/1.1 'Manrope', system-ui, sans-serif; transition: transform .5s var(--muelle); }
+  .btn::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; background: var(--led); transform: scaleX(0); transform-origin: 0 50%; transition: transform .55s var(--salida); }
+  .btn span { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; color: var(--noche); }
+  .btn { background: var(--cal); }
   .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
-  .btn:hover span { transform: translateY(-5px); background: var(--blanco); }
-  .btn:active span { transform: translateY(2px); }
-  .btn:focus-visible { outline: none; }
-  .btn:focus-visible span { outline: 2px solid var(--cal); outline-offset: 4px; }
-  /* La home entera en una vitrina sobre gradas: pasa despacio, de arriba abajo */
+  .btn:hover { transform: translateY(-2px); }
+  .btn:hover::before { transform: scaleX(1); }
+  .btn:active { transform: scale(.96); }
+  .btn:focus-visible { outline: 2px solid var(--cal); outline-offset: 4px; }
+  /* La home entera en su marco: pasa despacio, de arriba abajo */
   .vitrina { justify-self: center; display: grid; justify-items: center; margin: 0; }
-  .ventana { display: block; width: min(320px, 72vw); height: var(--alto); overflow: hidden; background: #111; box-shadow: 0 18px 44px -10px rgba(0, 0, 0, .6), inset 0 0 0 1px rgba(227, 231, 240, .12); }
-  .grada { display: block; height: 10px; background: linear-gradient(180deg, rgba(227, 231, 240, .8) 0 1px, var(--basalto) 1px); }
-  .g1 { width: calc(min(320px, 72vw) + 20px); } .g2 { width: calc(min(320px, 72vw) + 40px); background: linear-gradient(180deg, rgba(227, 231, 240, .6) 0 1px, var(--noche-3) 1px); } .g3 { width: calc(min(320px, 72vw) + 60px); background: linear-gradient(180deg, rgba(227, 231, 240, .45) 0 1px, var(--noche-2) 1px); }
-  figcaption { margin-top: 14px; font-size: 14.5px; color: var(--pizarra); }
+  .ventana { display: block; width: min(320px, 72vw); height: var(--alto); overflow: hidden; border-radius: 12px; background: #111; box-shadow: 0 0 0 2px var(--led), 0 0 0 10px rgba(243, 217, 164, .1), 0 24px 60px -12px rgba(0, 0, 0, .7); }
+  .ventana:focus-visible { outline: 2px solid var(--cal); outline-offset: 14px; }
+  figcaption { margin-top: 22px; font-size: 14.5px; color: var(--pizarra); }
   @media (min-width: 900px) { .aviso { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(48px, 6vw, 96px); } .vitrina { justify-self: end; } }
   @keyframes recorrer { 0%, 6% { transform: none; } 94%, 100% { transform: translateY(calc(-100% + var(--alto))); } }
   @keyframes entrar { from { opacity: 0; transform: translateY(18px); } }
-  @keyframes subir { from { opacity: 0; transform: scaleX(.6); } }
+  @keyframes subir { from { opacity: 0; transform: translateY(24px) scale(.96); } }
   @media (prefers-reduced-motion: no-preference) {
     .ventana img { animation: recorrer 52s ease-in-out 1.4s infinite alternate; }
     .vitrina:hover .ventana img, .ventana:focus img { animation-play-state: paused; }
     .texto > * { animation: entrar .9s var(--salida) both; }
     .texto > :nth-child(2) { animation-delay: .12s; } .texto > :nth-child(3) { animation-delay: .24s; }
-    .grada { animation: subir .8s var(--muelle) both; } .g2 { animation-delay: .1s; } .g3 { animation-delay: .2s; }
+    .ventana { animation: subir 1s var(--muelle) both; }
   }
   @media (prefers-reduced-motion: reduce) { .ventana { overflow-y: auto; } }
 </style>
@@ -79,9 +79,8 @@
     </div>
     <figure class="vitrina">
       <span class="ventana" tabindex="0" aria-label="Miniatura de la home completa">
-        <img src="assets/img/home-entera.jpg" width="576" height="4365" alt="Miniatura de la home propuesta para Tikal Muebles, completa de arriba abajo: su salón sobre las terrazas del templo, la filosofía, los proyectos, los trabajos reales, el catálogo, los sofás y sus telas, las mesas, la experiencia del equipo y la visita a la tienda con el formulario">
+        <img src="assets/img/home-entera.jpg" width="576" height="4847" alt="Miniatura de la home propuesta para Tikal Muebles, completa de arriba abajo: su salón dibujado como una idea que se convierte en el mueble, el lema, los proyectos, los trabajos reales, el catálogo, los sofás y sus telas, las mesas, la experiencia del equipo y la visita a la tienda con el formulario">
       </span>
-      <span class="grada g1" aria-hidden="true"></span><span class="grada g2" aria-hidden="true"></span><span class="grada g3" aria-hidden="true"></span>
       <figcaption>La propuesta de home, entera</figcaption>
     </figure>
   </main>
