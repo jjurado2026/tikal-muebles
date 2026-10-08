@@ -41,7 +41,7 @@
 <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/avif"
   imagesrcset="assets/img/hero-salon-960.avif 960w, assets/img/hero-salon-1440.avif 1440w, assets/img/hero-salon-1920.avif 1920w, assets/img/hero-salon-2560.avif 2560w"
-  imagesizes="(min-aspect-ratio: 4/3) and (min-width: 900px) 72vw, 96vw">
+  imagesizes="(min-aspect-ratio: 4/3) and (min-width: 900px) 64vw, 96vw">
 <link rel="stylesheet" href="assets/css/global.css?v=2">
 <link rel="stylesheet" href="assets/css/home.css?v=2">
 <script type="application/ld+json">
@@ -70,6 +70,8 @@
   <symbol id="i-libreria" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 9h16M4 15h16M12 9v6"/></symbol>
   <symbol id="i-mesa" viewBox="0 0 24 24"><path d="M2.5 7.5h19v2.6h-19zM6 10.1V20M18 10.1V20"/></symbol>
   <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M5 11V8.4A2.4 2.4 0 0 1 7.4 6h9.2A2.4 2.4 0 0 1 19 8.4V11"/><path d="M2.8 11h18.4v6.2H2.8zM5 17.2v2.6M19 17.2v2.6"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5 7 7M17 17l1.5 1.5M5.5 18.5 7 17M17 7l1.5-1.5"/></symbol>
+  <symbol id="i-luna" viewBox="0 0 24 24"><path d="M19.6 14.6A8 8 0 0 1 9.4 4.4a8 8 0 1 0 10.2 10.2z"/></symbol>
   <symbol id="i-catalogo" viewBox="0 0 24 24"><path d="M12 6.4C9.8 4.9 6.9 4.4 3.2 4.9v13.4c3.7-.5 6.6 0 8.8 1.5 2.2-1.5 5.1-2 8.8-1.5V4.9c-3.7-.5-6.6 0-8.8 1.5z"/><path d="M12 6.4v13.4M6 8.6c1.5-.1 2.8.1 3.8.6M6 11.6c1.5-.1 2.8.1 3.8.6M14.2 9.2c1-.5 2.3-.7 3.8-.6M14.2 12.2c1-.5 2.3-.7 3.8-.6"/></symbol>
   <symbol id="i-medida" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="1"/><path d="M12 4v16M3.5 12h8.5"/></symbol>
   <symbol id="i-izq" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
@@ -94,25 +96,31 @@
 
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-<!-- ============================ CABECERA: fija; el menú lleva a sus páginas ============================ -->
+<!-- ============================ CABECERA: fija; el logo en el centro; todo lleva a sus páginas ============================ -->
 <header class="cab" id="cabecera">
-  <a class="cab-logo" href="https://tikalmuebles.com/" aria-label="Tikal Muebles, inicio"><svg class="logo" aria-hidden="true" focusable="false"><use href="#logo-tikal"/></svg></a>
-  <nav class="cab-menu" aria-label="Principal">
-    <ul>
-      <li><a class="m-link" href="https://tikalmuebles.com/librerias/">Librerías</a></li>
-      <li><a class="m-link" href="https://tikalmuebles.com/mesas/">Mesas</a></li>
-      <li><a class="m-link" href="https://tikalmuebles.com/sofas/">Sofás</a></li>
-      <li><a class="m-link" href="https://tikalmuebles.com/muebles-a-medida/">Muebles a medida</a></li>
-      <li><a class="m-link" href="https://tikalmuebles.com/nosotros/">Nosotros</a></li>
-      <li><a class="m-link" href="https://tikalmuebles.com/contacto/">Contacto</a></li>
-    </ul>
-  </nav>
-  <div class="cab-acciones">
-    <a class="cab-tel" href="tel:+34681918194" aria-label="Llamar al 681 91 81 94"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg><span class="cab-tel-txt">681 91 81 94</span></a>
-    <a class="btn btn-claro btn-peq btn-presu" href="#contacto"><span>Solicita presupuesto</span></a>
-    <nav class="idioma" aria-label="Idioma"><a href="#inicio" aria-current="page" lang="es">ES</a><a href="https://tikalmuebles.com/en/" lang="en" hreflang="en">EN</a></nav>
-    <button class="tema" type="button" aria-pressed="false" aria-label="Modo oscuro"><span class="tema-txt" aria-hidden="true">Claro</span><span class="tema-pista" aria-hidden="true"><span class="tema-bola"></span></span><span class="tema-txt" aria-hidden="true">Oscuro</span></button>
+  <div class="cab-izq">
     <button class="cab-menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil"><span class="hamb" aria-hidden="true"><span></span></span><span class="cab-menu-txt">Menú</span></button>
+    <nav class="cab-menu" aria-label="Lo que fabricamos">
+      <ul>
+        <li><a class="m-link" href="https://tikalmuebles.com/librerias/">Librerías</a></li>
+        <li><a class="m-link" href="https://tikalmuebles.com/mesas/">Mesas</a></li>
+        <li><a class="m-link" href="https://tikalmuebles.com/sofas/">Sofás</a></li>
+        <li><a class="m-link" href="https://tikalmuebles.com/muebles-a-medida/">Muebles a medida</a></li>
+      </ul>
+    </nav>
+  </div>
+  <a class="cab-logo" href="https://tikalmuebles.com/" aria-label="Tikal Muebles, inicio"><svg class="logo" aria-hidden="true" focusable="false"><use href="#logo-tikal"/></svg></a>
+  <div class="cab-der">
+    <nav class="cab-casa" aria-label="Tikal">
+      <ul>
+        <li><a class="m-link" href="https://tikalmuebles.com/nosotros/">Nosotros</a></li>
+        <li><a class="m-link" href="https://tikalmuebles.com/contacto/">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="cab-tel" href="tel:+34681918194" aria-label="Llamar al 681 91 81 94"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg><span class="cab-tel-txt">681 91 81 94</span></a>
+    <a class="btn btn-claro btn-peq btn-presu" href="#contacto"><span>Presupuesto</span></a>
+    <nav class="idioma" aria-label="Idioma"><a href="#inicio" aria-current="page" lang="es">ES</a><a href="https://tikalmuebles.com/en/" lang="en" hreflang="en">EN</a></nav>
+    <button class="tema tema-ic" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg class="ic ic-sol" aria-hidden="true"><use href="#i-sol"/></svg><svg class="ic ic-luna" aria-hidden="true"><use href="#i-luna"/></svg></button>
   </div>
 </header>
 
@@ -136,117 +144,43 @@
 </div>
 
 <main id="contenido">
-  <!-- ============================ 1 · HERO (su bloque 1): su lema, con la palabra que cambia al recorrer sus muebles ============================ -->
-  <section class="hero" id="inicio" data-hero aria-labelledby="titular">
+  <!-- ============================ 1 · HERO (su bloque 1): su salón, su lema y, debajo, lo que fabrican ============================ -->
+  <section class="hero grano" id="inicio" data-hero aria-labelledby="titular">
     <div class="hero-marco">
-      <h1 class="hero-titulo" id="titular"><span class="ht-l1">Fabricamos</span> <span class="ht-l2"><span class="ht-tus">tus</span> <span class="ht-giro"><span class="ht-palabra">ideas</span></span></span></h1>
-      <div class="hero-lado">
-        <p class="entradilla a" style="--d:0">Diseñamos y fabricamos muebles a medida. Nos adaptamos a tu espacio, tu estilo y tus necesidades.</p>
-        <div class="acciones grupo">
-          <a class="btn btn-claro btn-principal a" style="--d:1" href="#contacto"><span>Solicita presupuesto</span></a>
-          <a class="btn btn-hueco a" style="--d:2" href="tel:+34681918194"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg><span>Llamar</span></a>
-          <a class="btn btn-hueco a" style="--d:3" href="https://www.google.com/maps/dir/?api=1&amp;destination=C.%20Oxford%204B%2C%2028232%20Las%20Rozas%20de%20Madrid" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-mapa"/></svg><span>Cómo llegar</span></a>
-        </div>
-        <ul class="hero-cats" aria-label="Lo que fabricamos">
-          <li class="a" style="--d:4"><a class="hc" href="#catalogo" data-cat="librerias"><svg class="ic" aria-hidden="true"><use href="#i-libreria"/></svg><span>Librerías</span></a></li>
-          <li class="a" style="--d:5"><a class="hc" href="#catalogo" data-cat="muebles"><svg class="ic" aria-hidden="true"><use href="#i-medida"/></svg><span>Muebles a medida</span></a></li>
-          <li class="a" style="--d:6"><a class="hc" href="#sofas" data-cat="sofas"><svg class="ic" aria-hidden="true"><use href="#i-sofa"/></svg><span>Sofás</span></a></li>
-          <li class="a" style="--d:7"><a class="hc" href="#mesas" data-cat="mesas"><svg class="ic" aria-hidden="true"><use href="#i-mesa"/></svg><span>Mesas</span></a></li>
-        </ul>
-      </div>
       <figure class="hero-foto">
         <picture>
-          <source type="image/avif" srcset="assets/img/hero-salon-960.avif 960w, assets/img/hero-salon-1440.avif 1440w, assets/img/hero-salon-1920.avif 1920w, assets/img/hero-salon-2560.avif 2560w" sizes="(min-aspect-ratio: 4/3) and (min-width: 900px) 72vw, 96vw">
-          <source type="image/webp" srcset="assets/img/hero-salon-960.webp 960w, assets/img/hero-salon-1440.webp 1440w, assets/img/hero-salon-1920.webp 1920w, assets/img/hero-salon-2560.webp 2560w" sizes="(min-aspect-ratio: 4/3) and (min-width: 900px) 72vw, 96vw">
+          <source type="image/avif" srcset="assets/img/hero-salon-960.avif 960w, assets/img/hero-salon-1440.avif 1440w, assets/img/hero-salon-1920.avif 1920w, assets/img/hero-salon-2560.avif 2560w" sizes="(min-aspect-ratio: 4/3) and (min-width: 900px) 64vw, 96vw">
+          <source type="image/webp" srcset="assets/img/hero-salon-960.webp 960w, assets/img/hero-salon-1440.webp 1440w, assets/img/hero-salon-1920.webp 1920w, assets/img/hero-salon-2560.webp 2560w" sizes="(min-aspect-ratio: 4/3) and (min-width: 900px) 64vw, 96vw">
           <img class="hf-real" data-foto src="assets/img/hero-salon-1440.webp" width="1440" height="960" alt="Salón con librería de pared en blanco y roble con luces led, televisión empotrada, sofá rinconera y comedor" fetchpriority="high" decoding="async">
         </picture>
         <!-- La entrada: una puerta de palillería de roble que abre sus lamas -->
         <div class="hf-lamas" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i><i style="--k:12"></i><i style="--k:13"></i></div>
-        <a class="pin" href="#catalogo" data-cat="librerias" style="--x:21%;--y:41%"><span class="pin-punto"></span><span class="pin-eti">Librerías</span></a>
-        <a class="pin" href="#catalogo" data-cat="muebles" style="--x:51%;--y:59%"><span class="pin-punto"></span><span class="pin-eti">Muebles a medida</span></a>
+        <a class="pin" href="#catalogo-librerias" data-cat="librerias" style="--x:21%;--y:41%"><span class="pin-punto"></span><span class="pin-eti">Librerías</span></a>
+        <a class="pin" href="#catalogo-muebles" data-cat="muebles" style="--x:51%;--y:59%"><span class="pin-punto"></span><span class="pin-eti">Muebles a medida</span></a>
         <a class="pin" href="#sofas" data-cat="sofas" style="--x:76%;--y:66%"><span class="pin-punto"></span><span class="pin-eti">Sofás</span></a>
         <a class="pin pin-izq" href="#mesas" data-cat="mesas" style="--x:88%;--y:50%"><span class="pin-punto"></span><span class="pin-eti">Mesas</span></a>
       </figure>
-      <span class="hero-guia" aria-hidden="true"></span>
-    </div>
-  </section>
-
-  <!-- ============================ 2 · INTRO (su bloque 2): las palabras se encienden al leer ============================ -->
-  <section class="intro" aria-label="Tikal Muebles en Las Rozas de Madrid">
-    <div class="envoltura intro-cuerpo">
-      <p class="intro-texto" data-encender>Ubicados en Las Rozas de Madrid, en Tikal Muebles nos especializamos en transformar tus ideas en realidad. Somos más que una tienda de muebles: ofrecemos soluciones personalizadas que se adaptan perfectamente a tus necesidades y estilo.</p>
-      <a class="btn btn-principal" href="#contacto"><span>Solicita presupuesto</span></a>
-    </div>
-  </section>
-
-  <!-- ============================ 3 · NUESTRA FILOSOFÍA (su bloque 3): su lema, en grande y en movimiento ============================ -->
-  <section class="filosofia" aria-labelledby="t-filosofia">
-    <div class="lema" aria-hidden="true" data-ancho-libre>
-      <p class="lema-fila"><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span></p>
-      <p class="lema-fila lema-inversa"><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span></p>
-    </div>
-    <div class="envoltura filosofia-rejilla revelar">
-      <h2 class="titular" id="t-filosofia"><span class="linea"><span>Nuestra</span></span><span class="linea"><span>filosofía</span></span></h2>
-      <div class="filosofia-texto">
-        <p class="entrada sube" style="--d:1">Con un enfoque en la personalización, creamos diseños a medida en diversas medidas y acabados. Ya sea para tu hogar o tu centro de trabajo, nuestros muebles están pensados para crear ambientes funcionales y estéticamente agradables.</p>
-        <details class="mas sube" style="--d:2"><summary>Leer más</summary><p>Cada mueble está diseñado para añadir un toque especial a tus espacios, asegurando que cada rincón refleje tu personalidad y estilo.</p></details>
-        <div class="botones sube" style="--d:3"><a class="btn" href="#catalogo"><span>Ver el catálogo</span></a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ 4 · PROYECTOS PERSONALIZADOS (su bloque 4): de la idea al sofá ============================ -->
-  <section class="proyectos" id="proyectos" aria-labelledby="t-proyectos">
-    <div class="envoltura proyectos-rejilla">
-      <figure class="armario" data-armario>
-        <div class="armario-foto"><img data-foto src="assets/img/sofa-dumas-1280.webp" srcset="assets/img/sofa-dumas-640.webp 640w, assets/img/sofa-dumas-1280.webp 1280w, assets/img/sofa-dumas-1920.webp 1920w" sizes="(min-width: 1000px) 56vw, 92vw" width="1280" height="720" alt="Sofá Dumas con chaise longue en terciopelo azul" loading="lazy" decoding="async"></div>
-        <span class="hoja p-iz" aria-hidden="true"></span><span class="hoja p-de" aria-hidden="true"></span>
-      </figure>
-      <div class="proyectos-texto revelar">
-        <svg class="proyectos-logo sube" aria-hidden="true"><use href="#logo-tikal"/></svg>
-        <h2 class="titular" id="t-proyectos"><span class="linea"><span>Proyectos</span></span><span class="linea"><span>personalizados</span></span></h2>
-        <p class="entrada sube" style="--d:1">En Tikal Muebles nos especializamos en proyectos de amueblado a medida. Trabajamos contigo para entender tus necesidades y deseos, asegurando que cada detalle sea perfecto y a tu gusto.</p>
-        <div class="botones grupo sube" style="--d:2">
-          <a class="btn btn-principal" href="#contacto"><span>Solicita presupuesto</span></a>
-          <a class="btn btn-linea" href="#trabajos"><span>Ver trabajos</span></a>
+      <div class="hero-lado">
+        <h1 class="hero-titulo" id="titular"><span class="ht-l1">Fabricamos</span> <span class="ht-l2"><span class="ht-tus">tus</span> <span class="ht-giro"><span class="ht-palabra">ideas</span></span></span></h1>
+        <p class="entradilla a" style="--d:0">Diseñamos y fabricamos muebles a medida. Nos adaptamos a tu espacio, tu estilo y tus necesidades.</p>
+        <div class="acciones">
+          <a class="btn btn-claro a" style="--d:1" href="#contacto"><span>Solicita presupuesto</span></a>
+          <div class="hero-enlaces a" style="--d:2">
+            <a class="he" href="tel:+34681918194"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg><span>681 91 81 94</span></a>
+            <a class="he" href="https://www.google.com/maps/dir/?api=1&amp;destination=C.%20Oxford%204B%2C%2028232%20Las%20Rozas%20de%20Madrid" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-mapa"/></svg><span>Cómo llegar</span></a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============================ 5 · CADA CENTÍMETRO CUENTA: la estantería de trabajos reales ============================ -->
-  <section class="trabajos" id="trabajos" aria-labelledby="t-trabajos">
-    <div class="envoltura trabajos-cabeza revelar">
-      <h2 class="titular" id="t-trabajos"><span class="linea"><span>Cada centímetro cuenta</span></span></h2>
-      <p class="entrada sube" style="--d:1">Diseñamos soluciones que se adaptan perfectamente a paredes, rincones y espacios difíciles.</p>
-    </div>
-    <div class="estanteria" data-ancho-libre>
-      <ul class="est-pista">
-        <li><button class="hueco" type="button" data-i="0"><img data-foto src="assets/img/trabajo-libreria-laca-madera-led-480.webp" srcset="assets/img/trabajo-libreria-laca-madera-led-480.webp 480w, assets/img/trabajo-libreria-laca-madera-led-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Librería en laca y madera con luces led" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-laca-madera-led-1530.webp"><span class="hueco-pie">Librería en laca y madera con luces led</span></button></li>
-        <li><button class="hueco" type="button" data-i="1"><img data-foto src="assets/img/trabajo-vestidor-palilleria-480.webp" srcset="assets/img/trabajo-vestidor-palilleria-480.webp 480w, assets/img/trabajo-vestidor-palilleria-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="641" alt="Vestidor con puerta de palillería" loading="lazy" decoding="async" data-grande="assets/img/trabajo-vestidor-palilleria-1199.webp"><span class="hueco-pie">Vestidor con puerta de palillería</span></button></li>
-        <li><button class="hueco" type="button" data-i="2"><img data-foto src="assets/img/trabajo-vitrinas-laca-cristal-480.webp" srcset="assets/img/trabajo-vitrinas-laca-cristal-480.webp 480w, assets/img/trabajo-vitrinas-laca-cristal-960.webp 960w" sizes="(min-width: 768px) 370px, 66vw" width="480" height="586" alt="Vitrinas personalizadas en laca y cristal con luces led. Zona de almacenaje inferior" loading="lazy" decoding="async" data-grande="assets/img/trabajo-vitrinas-laca-cristal-1200.webp" data-extra="Fabricada para guardar una colección de coches."><span class="hueco-pie">Vitrinas personalizadas en laca y cristal con luces led</span></button></li>
-        <li><button class="hueco" type="button" data-i="3"><img data-foto src="assets/img/trabajo-mueble-tv-270-640.webp" srcset="assets/img/trabajo-mueble-tv-270-640.webp 640w, assets/img/trabajo-mueble-tv-270-1280.webp 1280w" sizes="(min-width: 768px) 740px, 96vw" width="640" height="389" alt="Mueble para TV en laca y madera, 270 × 40 × 60" loading="lazy" decoding="async" data-grande="assets/img/trabajo-mueble-tv-270-1848.webp"><span class="hueco-pie">Mueble para TV en laca y madera, 270 × 40 × 60</span></button></li>
-        <li><button class="hueco" type="button" data-i="4"><img data-foto src="assets/img/trabajo-mueble-roble-480.webp" srcset="assets/img/trabajo-mueble-roble-480.webp 480w, assets/img/trabajo-mueble-roble-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Mueble a medida en madera de roble" loading="lazy" decoding="async" data-grande="assets/img/trabajo-mueble-roble-1536.webp"><span class="hueco-pie">Mueble a medida en madera de roble</span></button></li>
-        <li><button class="hueco" type="button" data-i="5"><img data-foto src="assets/img/libreria-lacada-led-480.webp" srcset="assets/img/libreria-lacada-led-480.webp 480w, assets/img/libreria-lacada-led-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Librería lacada a medida con luces led" loading="lazy" decoding="async" data-grande="assets/img/libreria-lacada-led-1530.webp"><span class="hueco-pie">Librería lacada a medida con luces led</span></button></li>
-        <li><button class="hueco" type="button" data-i="6"><img data-foto src="assets/img/trabajo-libreria-roble-480.webp" srcset="assets/img/trabajo-libreria-roble-480.webp 480w, assets/img/trabajo-libreria-roble-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Librería fabricada a medida en madera de roble" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-roble-1200.webp"><span class="hueco-pie">Librería fabricada a medida en madera de roble</span></button></li>
-        <li><button class="hueco" type="button" data-i="7"><img data-foto src="assets/img/trabajo-libreria-blanca-led-640.webp" srcset="assets/img/trabajo-libreria-blanca-led-640.webp 640w, assets/img/trabajo-libreria-blanca-led-1280.webp 1280w" sizes="(min-width: 768px) 600px, 96vw" width="640" height="480" alt="Librería lacada en blanco a medida con luces led" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-blanca-led-2048.webp"><span class="hueco-pie">Librería lacada en blanco a medida con luces led</span></button></li>
-        <li><button class="hueco" type="button" data-i="8"><img data-foto src="assets/img/trabajo-zona-trabajo-roble-480.webp" srcset="assets/img/trabajo-zona-trabajo-roble-480.webp 480w, assets/img/trabajo-zona-trabajo-roble-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Zona de trabajo a medida con mesa y estantes en roble" loading="lazy" decoding="async" data-grande="assets/img/trabajo-zona-trabajo-roble-1200.webp"><span class="hueco-pie">Zona de trabajo a medida con mesa y estantes en roble</span></button></li>
-        <li><button class="hueco" type="button" data-i="9"><img data-foto src="assets/img/trabajo-libreria-armario-480.webp" srcset="assets/img/trabajo-libreria-armario-480.webp 480w, assets/img/trabajo-libreria-armario-960.webp 960w" sizes="(min-width: 768px) 260px, 46vw" width="480" height="853" alt="Librería a medida lacada en blanco con armario integrado y almacenaje inferior" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-armario-1152.webp"><span class="hueco-pie">Librería a medida lacada en blanco con armario integrado</span></button></li>
+      <ul class="hero-cats" aria-label="Lo que fabricamos">
+        <li class="a" style="--d:3"><a class="hc" href="#catalogo-librerias" data-cat="librerias"><span class="hc-foto"><img src="assets/img/expo-libreria-azul-640.webp" width="640" height="562" alt="" decoding="async"></span><span class="hc-nombre">Librerías</span></a></li>
+        <li class="a" style="--d:4"><a class="hc" href="#mesas" data-cat="mesas"><span class="hc-foto"><img src="assets/img/cat-mesas-cruceta-640.webp" width="640" height="360" alt="" decoding="async"></span><span class="hc-nombre">Mesas</span></a></li>
+        <li class="a" style="--d:5"><a class="hc" href="#sofas" data-cat="sofas"><span class="hc-foto"><img src="assets/img/sofa-romeo-640.webp" width="640" height="506" alt="" decoding="async"></span><span class="hc-nombre">Sofás</span></a></li>
+        <li class="a" style="--d:6"><a class="hc" href="#catalogo-muebles" data-cat="muebles"><span class="hc-foto"><img src="assets/img/cat-muebles-medida-640.webp" width="640" height="360" alt="" decoding="async"></span><span class="hc-nombre">Muebles a medida</span></a></li>
       </ul>
     </div>
-    <div class="envoltura trabajos-pie">
-      <div class="est-mandos">
-        <button class="est-btn" type="button" data-mover="-1" aria-label="Trabajo anterior"><svg class="ic" aria-hidden="true"><use href="#i-izq"/></svg></button>
-        <button class="est-btn" type="button" data-mover="1" aria-label="Trabajo siguiente"><svg class="ic" aria-hidden="true"><use href="#i-der"/></svg></button>
-      </div>
-      <div class="botones grupo">
-        <button class="btn btn-claro btn-principal" type="button" data-abrir-visor="todos"><span>Ver más trabajos</span></button>
-        <a class="btn btn-hueco" href="#contacto"><span>Solicita presupuesto</span></a>
-      </div>
-    </div>
   </section>
 
-  <!-- ============================ 6 · CATÁLOGO: un índice; la foto de cada categoría sigue al cursor ============================ -->
+  <!-- ============================ 2 · CATÁLOGO, justo tras el hero: un índice; la foto de cada categoría sigue al cursor ============================ -->
   <section class="catalogo" id="catalogo" aria-labelledby="t-catalogo">
     <div class="envoltura">
       <div class="catalogo-cabeza revelar">
@@ -295,8 +229,83 @@
     <div class="flotador" aria-hidden="true"><div class="flotador-in"><img alt="" width="640" height="480"></div></div>
   </section>
 
+  <!-- ============================ 2 · INTRO (su bloque 2): las palabras se encienden al leer ============================ -->
+  <section class="intro" aria-label="Tikal Muebles en Las Rozas de Madrid">
+    <div class="envoltura intro-cuerpo">
+      <p class="intro-texto" data-encender>Ubicados en Las Rozas de Madrid, en Tikal Muebles nos especializamos en transformar tus ideas en realidad. Somos más que una tienda de muebles: ofrecemos soluciones personalizadas que se adaptan perfectamente a tus necesidades y estilo.</p>
+      <a class="btn btn-principal" href="#contacto"><span>Solicita presupuesto</span></a>
+    </div>
+  </section>
+
+  <!-- ============================ 3 · NUESTRA FILOSOFÍA (su bloque 3): su lema, en grande y en movimiento ============================ -->
+  <section class="filosofia grano" aria-labelledby="t-filosofia">
+    <div class="lema" aria-hidden="true" data-ancho-libre>
+      <p class="lema-fila"><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span></p>
+      <p class="lema-fila lema-inversa"><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span></p>
+    </div>
+    <div class="envoltura filosofia-rejilla revelar">
+      <h2 class="titular" id="t-filosofia"><span class="linea"><span>Nuestra</span></span><span class="linea"><span>filosofía</span></span></h2>
+      <div class="filosofia-texto">
+        <p class="entrada sube" style="--d:1">Con un enfoque en la personalización, creamos diseños a medida en diversas medidas y acabados. Ya sea para tu hogar o tu centro de trabajo, nuestros muebles están pensados para crear ambientes funcionales y estéticamente agradables.</p>
+        <details class="mas sube" style="--d:2"><summary>Leer más</summary><p>Cada mueble está diseñado para añadir un toque especial a tus espacios, asegurando que cada rincón refleje tu personalidad y estilo.</p></details>
+        <div class="botones sube" style="--d:3"><a class="btn" href="#catalogo"><span>Ver el catálogo</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 4 · PROYECTOS PERSONALIZADOS (su bloque 4): de la idea al sofá ============================ -->
+  <section class="proyectos" id="proyectos" aria-labelledby="t-proyectos">
+    <div class="envoltura proyectos-rejilla">
+      <figure class="armario" data-armario>
+        <div class="armario-foto"><img data-foto src="assets/img/sofa-dumas-1280.webp" srcset="assets/img/sofa-dumas-640.webp 640w, assets/img/sofa-dumas-1280.webp 1280w, assets/img/sofa-dumas-1920.webp 1920w" sizes="(min-width: 1000px) 56vw, 92vw" width="1280" height="720" alt="Sofá Dumas con chaise longue en terciopelo azul" loading="lazy" decoding="async"></div>
+        <span class="hoja p-iz" aria-hidden="true"></span><span class="hoja p-de" aria-hidden="true"></span>
+      </figure>
+      <div class="proyectos-texto revelar">
+        <svg class="proyectos-logo sube" aria-hidden="true"><use href="#logo-tikal"/></svg>
+        <h2 class="titular" id="t-proyectos"><span class="linea"><span>Proyectos</span></span><span class="linea"><span>personalizados</span></span></h2>
+        <p class="entrada sube" style="--d:1">En Tikal Muebles nos especializamos en proyectos de amueblado a medida. Trabajamos contigo para entender tus necesidades y deseos, asegurando que cada detalle sea perfecto y a tu gusto.</p>
+        <div class="botones grupo sube" style="--d:2">
+          <a class="btn btn-principal" href="#contacto"><span>Solicita presupuesto</span></a>
+          <a class="btn btn-linea" href="#trabajos"><span>Ver trabajos</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 5 · CADA CENTÍMETRO CUENTA: la estantería de trabajos reales ============================ -->
+  <section class="trabajos grano" id="trabajos" aria-labelledby="t-trabajos">
+    <div class="envoltura trabajos-cabeza revelar">
+      <h2 class="titular" id="t-trabajos"><span class="linea"><span>Cada centímetro cuenta</span></span></h2>
+      <p class="entrada sube" style="--d:1">Diseñamos soluciones que se adaptan perfectamente a paredes, rincones y espacios difíciles.</p>
+    </div>
+    <div class="estanteria" data-ancho-libre>
+      <ul class="est-pista">
+        <li><button class="hueco" type="button" data-i="0"><img data-foto src="assets/img/trabajo-libreria-laca-madera-led-480.webp" srcset="assets/img/trabajo-libreria-laca-madera-led-480.webp 480w, assets/img/trabajo-libreria-laca-madera-led-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Librería en laca y madera con luces led" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-laca-madera-led-1530.webp"><span class="hueco-pie">Librería en laca y madera con luces led</span></button></li>
+        <li><button class="hueco" type="button" data-i="1"><img data-foto src="assets/img/trabajo-vestidor-palilleria-480.webp" srcset="assets/img/trabajo-vestidor-palilleria-480.webp 480w, assets/img/trabajo-vestidor-palilleria-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="641" alt="Vestidor con puerta de palillería" loading="lazy" decoding="async" data-grande="assets/img/trabajo-vestidor-palilleria-1199.webp"><span class="hueco-pie">Vestidor con puerta de palillería</span></button></li>
+        <li><button class="hueco" type="button" data-i="2"><img data-foto src="assets/img/trabajo-vitrinas-laca-cristal-480.webp" srcset="assets/img/trabajo-vitrinas-laca-cristal-480.webp 480w, assets/img/trabajo-vitrinas-laca-cristal-960.webp 960w" sizes="(min-width: 768px) 370px, 66vw" width="480" height="586" alt="Vitrinas personalizadas en laca y cristal con luces led. Zona de almacenaje inferior" loading="lazy" decoding="async" data-grande="assets/img/trabajo-vitrinas-laca-cristal-1200.webp" data-extra="Fabricada para guardar una colección de coches."><span class="hueco-pie">Vitrinas personalizadas en laca y cristal con luces led</span></button></li>
+        <li><button class="hueco" type="button" data-i="3"><img data-foto src="assets/img/trabajo-mueble-tv-270-640.webp" srcset="assets/img/trabajo-mueble-tv-270-640.webp 640w, assets/img/trabajo-mueble-tv-270-1280.webp 1280w" sizes="(min-width: 768px) 740px, 96vw" width="640" height="389" alt="Mueble para TV en laca y madera, 270 × 40 × 60" loading="lazy" decoding="async" data-grande="assets/img/trabajo-mueble-tv-270-1848.webp"><span class="hueco-pie">Mueble para TV en laca y madera, 270 × 40 × 60</span></button></li>
+        <li><button class="hueco" type="button" data-i="4"><img data-foto src="assets/img/trabajo-mueble-roble-480.webp" srcset="assets/img/trabajo-mueble-roble-480.webp 480w, assets/img/trabajo-mueble-roble-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Mueble a medida en madera de roble" loading="lazy" decoding="async" data-grande="assets/img/trabajo-mueble-roble-1536.webp"><span class="hueco-pie">Mueble a medida en madera de roble</span></button></li>
+        <li><button class="hueco" type="button" data-i="5"><img data-foto src="assets/img/libreria-lacada-led-480.webp" srcset="assets/img/libreria-lacada-led-480.webp 480w, assets/img/libreria-lacada-led-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Librería lacada a medida con luces led" loading="lazy" decoding="async" data-grande="assets/img/libreria-lacada-led-1530.webp"><span class="hueco-pie">Librería lacada a medida con luces led</span></button></li>
+        <li><button class="hueco" type="button" data-i="6"><img data-foto src="assets/img/trabajo-libreria-roble-480.webp" srcset="assets/img/trabajo-libreria-roble-480.webp 480w, assets/img/trabajo-libreria-roble-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Librería fabricada a medida en madera de roble" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-roble-1200.webp"><span class="hueco-pie">Librería fabricada a medida en madera de roble</span></button></li>
+        <li><button class="hueco" type="button" data-i="7"><img data-foto src="assets/img/trabajo-libreria-blanca-led-640.webp" srcset="assets/img/trabajo-libreria-blanca-led-640.webp 640w, assets/img/trabajo-libreria-blanca-led-1280.webp 1280w" sizes="(min-width: 768px) 600px, 96vw" width="640" height="480" alt="Librería lacada en blanco a medida con luces led" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-blanca-led-2048.webp"><span class="hueco-pie">Librería lacada en blanco a medida con luces led</span></button></li>
+        <li><button class="hueco" type="button" data-i="8"><img data-foto src="assets/img/trabajo-zona-trabajo-roble-480.webp" srcset="assets/img/trabajo-zona-trabajo-roble-480.webp 480w, assets/img/trabajo-zona-trabajo-roble-960.webp 960w" sizes="(min-width: 768px) 340px, 60vw" width="480" height="640" alt="Zona de trabajo a medida con mesa y estantes en roble" loading="lazy" decoding="async" data-grande="assets/img/trabajo-zona-trabajo-roble-1200.webp"><span class="hueco-pie">Zona de trabajo a medida con mesa y estantes en roble</span></button></li>
+        <li><button class="hueco" type="button" data-i="9"><img data-foto src="assets/img/trabajo-libreria-armario-480.webp" srcset="assets/img/trabajo-libreria-armario-480.webp 480w, assets/img/trabajo-libreria-armario-960.webp 960w" sizes="(min-width: 768px) 260px, 46vw" width="480" height="853" alt="Librería a medida lacada en blanco con armario integrado y almacenaje inferior" loading="lazy" decoding="async" data-grande="assets/img/trabajo-libreria-armario-1152.webp"><span class="hueco-pie">Librería a medida lacada en blanco con armario integrado</span></button></li>
+      </ul>
+    </div>
+    <div class="envoltura trabajos-pie">
+      <div class="est-mandos">
+        <button class="est-btn" type="button" data-mover="-1" aria-label="Trabajo anterior"><svg class="ic" aria-hidden="true"><use href="#i-izq"/></svg></button>
+        <button class="est-btn" type="button" data-mover="1" aria-label="Trabajo siguiente"><svg class="ic" aria-hidden="true"><use href="#i-der"/></svg></button>
+      </div>
+      <div class="botones grupo">
+        <button class="btn btn-claro btn-principal" type="button" data-abrir-visor="todos"><span>Ver más trabajos</span></button>
+        <a class="btn btn-hueco" href="#contacto"><span>Solicita presupuesto</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================ 7 · SOFÁS: el escenario de sus seis modelos ============================ -->
-  <section class="sofas" id="sofas" aria-labelledby="t-sofas">
+  <section class="sofas grano" id="sofas" aria-labelledby="t-sofas">
     <div class="envoltura">
       <div class="sofas-cabeza revelar">
         <h2 class="titular" id="t-sofas"><span class="linea"><span>Sofás a medida</span></span><span class="linea"><span>de alta calidad</span></span></h2>
@@ -434,7 +443,7 @@
   </section>
 
   <!-- ============================ 8 · MESAS: la foto en el centro, sus modelos en órbita ============================ -->
-  <section class="mesas" id="mesas" aria-labelledby="t-mesas">
+  <section class="mesas grano" id="mesas" aria-labelledby="t-mesas">
     <div class="envoltura mesas-rejilla">
       <div class="mesas-texto revelar">
         <h2 class="titular" id="t-mesas"><span class="linea"><span>Mesas fijas</span></span><span class="linea"><span>o extensibles</span></span></h2>
@@ -563,7 +572,7 @@
 </main>
 
 <!-- ============================ PIE ============================ -->
-<footer class="pie">
+<footer class="pie grano">
   <p class="pie-lema" aria-hidden="true" data-ancho-libre><span>Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · Fabricamos tus ideas · </span></p>
   <div class="envoltura">
     <div class="pie-rejilla">

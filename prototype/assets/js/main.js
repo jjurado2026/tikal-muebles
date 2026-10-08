@@ -67,30 +67,16 @@
     setTimeout(() => vieja.remove(), 650);
   };
 
-  /* ---------- 5 · Recorrido por sus muebles: etiqueta en la foto, categoría en la lista y su línea de luz ---------- */
-  const pins = $$('.pin', hero), cats = $$('.hc', hero), guia = $('.hero-guia', hero), marco = $('.hero-marco', hero);
-  let actual = null, guiaVisible = false;
-  const trazarGuia = () => {
-    const hc = cats.find(c => c.dataset.cat === actual), pin = pins.find(p => p.dataset.cat === actual);
-    if (!hc || !pin || getComputedStyle(guia).display === 'none' || !hc.offsetParent) { guia.classList.remove('on'); guiaVisible = false; return; }
-    const m = marco.getBoundingClientRect(), a = hc.getBoundingClientRect(), b = pin.getBoundingClientRect();
-    const ax = a.right - m.left + 8, ay = a.top + a.height / 2 - m.top;
-    const dx = b.left + b.width / 2 - m.left - ax, dy = b.top + b.height / 2 - m.top - ay;
-    const largo = Math.max(0, Math.hypot(dx, dy) - 16), ang = Math.atan2(dy, dx);
-    const base = `translate(${ax.toFixed(1)}px, ${ay.toFixed(1)}px) rotate(${ang.toFixed(4)}rad)`;
-    if (!guiaVisible) { guia.classList.add('sin-t'); guia.style.transform = `${base} scaleX(0)`; void guia.offsetWidth; guia.classList.remove('sin-t'); }
-    guia.style.transform = `${base} scaleX(${largo.toFixed(1)})`;
-    guia.classList.add('on'); guiaVisible = true;
-  };
+  /* ---------- 5 · Recorrido por sus muebles: la etiqueta en la foto, su categoría en la franja y la palabra del lema ---------- */
+  const pins = $$('.pin', hero), cats = $$('.hc', hero);
+  let actual = null;
   const activar = cat => {
     if (cat === actual) return;
     actual = cat;
     pins.forEach(p => p.classList.toggle('activo', p.dataset.cat === cat));
     cats.forEach(c => c.classList.toggle('activo', c.dataset.cat === cat));
     ponerPalabra(cat ? PALABRA[cat] : 'ideas');
-    trazarGuia();
   };
-  addEventListener('resize', () => { guiaVisible = false; trazarGuia(); });
   let manual = false, paso = -1;
   const tomar = cat => { manual = true; activar(cat); };
   const soltar = () => { manual = false; };
