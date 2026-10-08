@@ -49,8 +49,9 @@
 .hero-foto { --fw: min(100vw, (var(--alto) - 370px) * 1.5); grid-area: foto; justify-self: center; position: relative; width: var(--fw); min-width: min(100vw, 250px); aspect-ratio: 3 / 2; margin: 0; overflow: clip; background: var(--noche-2); }
 .hero-foto img { width: 100%; height: 100%; }
 .hero .entradilla { grid-area: entradilla; padding-inline: var(--margen); max-width: calc(34em + 2 * var(--margen)); font-size: clamp(15px, min(4.6vw, 2.15vh), 20px); line-height: 1.6; color: var(--cal); }
-.hero .acciones { grid-area: acciones; padding-inline: var(--margen); gap: 10px 12px; }
+.hero .acciones { grid-area: acciones; display: flex; flex-wrap: wrap; align-items: center; padding-inline: var(--margen); gap: clamp(12px, 1.9vh, 18px) 12px; }
 @media (max-width: 599px) { .hero .acciones .btn { min-height: 48px; padding: 0 20px; } }
+@media (max-width: 359px) { .hero .acciones { column-gap: 10px; } .hero .acciones .btn { padding: 0 16px; } }
 @media (min-width: 600px) { .hero-foto { --fw: min(100vw - 2 * var(--margen), (var(--alto) - 400px) * 1.5); border-radius: 10px; box-shadow: var(--sombra-flotante); } }
 
 /* Móvil apaisado: texto a la izquierda, foto a la derecha */
@@ -60,7 +61,7 @@
   .hero-titulo { align-self: end; font-size: clamp(26px, min(9vh, 5.6vw), 50px); }
   .hero .entradilla { font-size: 13.5px; line-height: 1.5; }
   .hero-foto { --fw: min(50vw, (var(--alto) - 2 * var(--hp)) * 1.5); grid-row: 1 / -1; align-self: center; border-radius: 8px; }
-  .hero .acciones { gap: 8px 10px; }
+  .hero .acciones { gap: 10px; }
   .hero .acciones .btn { min-height: 44px; padding: 0 16px; font-size: 14.5px; }
 }
 
@@ -76,7 +77,7 @@
   .ht-l1 { display: inline-block; }
   .hero-lado { grid-area: lado; display: flex; flex-direction: column; gap: clamp(14px, 2.2vh, 26px); min-width: 0; }
   .hero .entradilla { padding: 0; font-size: clamp(15px, .55vw + 9px, 19px); }
-  .hero .acciones { padding: 0; }
+  .hero .acciones { padding: 0; gap: clamp(14px, 2vh, 22px) 14px; }
   .hero-cats { display: block; margin-top: auto; border-top: 1px solid rgba(163, 172, 196, .22); }
   .hero-foto { --fw: inherit; width: 100%; min-width: 0; border-radius: 12px; }
   .hero-guia { display: block; }
