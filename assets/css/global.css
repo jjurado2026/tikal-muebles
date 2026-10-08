@@ -231,8 +231,10 @@ input, select, textarea { font: inherit; color: inherit; }
 .visor::backdrop { background: transparent; }
 .visor[open] { display: grid; grid-template-rows: 1fr auto; }
 .v-escena { position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; padding: clamp(56px, 7svh, 88px) clamp(12px, 6vw, 120px) 8px; }
-.v-foto { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; box-shadow: var(--sombra-flotante); animation: v-entra .55s var(--muelle); }
-@keyframes v-entra { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+.v-foto { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; box-shadow: var(--sombra-flotante); }
+/* al pasar de foto: sin saltos, un fundido corto (la siguiente ya está cargada) */
+.v-foto.cambia { animation: v-cambia .28s ease-out; }
+@keyframes v-cambia { from { opacity: .2; } }
 .v-pie { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px clamp(12px, 6vw, 120px) calc(16px + env(safe-area-inset-bottom)); }
 .v-titulo { font: 600 clamp(15px, 1.1vw, 18px)/1.4 var(--f-texto); max-width: 60ch; }
 .v-cuenta { font-variant-numeric: tabular-nums; color: var(--pizarra-clara); white-space: nowrap; }

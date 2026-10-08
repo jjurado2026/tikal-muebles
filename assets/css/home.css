@@ -16,30 +16,37 @@
 :is(.filosofia, .trabajos, .sofas, .mesas) .btn:focus-visible { outline-color: var(--cal); }
 
 /* =====================================================================
-   1 · HERO · «Fabricamos tus ideas», hecho visible. La foto llega como el
-   boceto de la idea y una costura de luz la convierte en el mueble. Con
-   el cursor, una lupa enseña la idea debajo; nada se inclina ni se mueve
-   con el cursor. Sus etiquetas señalan cada mueble y llevan a su bloque.
+   1 · HERO · su titular gigante, con la palabra final que cambia al
+   ritmo de un recorrido por los muebles de su foto (librerías, muebles,
+   sofás, mesas… ideas). En escritorio, su lista de categorías se une a
+   cada mueble con una línea de luz. Al cargar, una puerta de palillería
+   de roble abre sus lamas y deja ver el salón. La foto no se mueve.
    ===================================================================== */
 .hero {
   --alto: calc(100vh - var(--cab-h));
   --hp: clamp(12px, 2.4vh, 36px);
   position: relative; isolation: isolate; overflow: clip;
   min-height: var(--alto); display: grid; place-items: center;
-  background: var(--noche); color: var(--cal);
+  background: radial-gradient(55% 65% at 74% 58%, rgba(243, 217, 164, .1), transparent 70%), radial-gradient(45% 55% at 12% 88%, rgba(114, 127, 159, .16), transparent 70%), var(--noche);
+  color: var(--cal);
 }
 @supports (height: 100svh) { .hero { --alto: calc(100svh - var(--cab-h)); --hp: clamp(12px, 2.4svh, 36px); } }
-/* su propia foto, difuminada, prolonga el salón por los lados */
-.hero-fondo { position: absolute; inset: 0; z-index: -1; overflow: clip; }
-.hero-fondo img { width: 100%; height: 100%; object-fit: cover; filter: blur(44px) saturate(1.15); transform: scale(1.3); opacity: .6; }
-.hero-fondo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 85% at 55% 42%, rgba(15, 19, 31, .3), rgba(15, 19, 31, .9) 70%), linear-gradient(180deg, rgba(15, 19, 31, .2), rgba(15, 19, 31, .6)); }
 
 /* Vertical (móvil y tableta): titular · foto · entradilla · botones */
 .hero-marco { position: relative; width: 100%; min-height: var(--alto); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "titulo" "foto" "entradilla" "acciones"; align-content: space-evenly; row-gap: clamp(12px, 2.2vh, 26px); padding: var(--hp) 0; }
-.hero-texto { display: contents; }
-.hero h1 { grid-area: titulo; padding-inline: var(--margen); font: 400 clamp(38px, min(16vw, 8vh), 104px)/.96 var(--f-titular); color: var(--blanco); letter-spacing: 0; }
-.hero h1 .linea { padding-bottom: .12em; margin-bottom: -.12em; }
-.hero-foto { --fw: min(100vw, (var(--alto) - 370px) * 1.5); grid-area: foto; justify-self: center; position: relative; width: var(--fw); min-width: min(100vw, 250px); aspect-ratio: 3 / 2; margin: 0; overflow: clip; background: var(--noche-2); --d: clamp(130px, 16vw, 270px); }
+.hero-lado { display: contents; }
+.hero-cats, .hero-guia { display: none; }
+.hero-titulo { grid-area: titulo; padding-inline: var(--margen); font: 400 clamp(38px, min(15vw, 8vh), 104px)/.96 var(--f-titular); color: var(--blanco); letter-spacing: 0; }
+.ht-l1 { display: block; }
+.ht-l2 { display: inline-block; white-space: nowrap; }
+.ht-ch { display: inline-block; }
+.ht-giro { position: relative; display: inline-block; vertical-align: top; overflow-x: visible; overflow-y: clip; padding: .14em 0 .12em; margin: -.14em 0 -.12em; }
+.ht-palabra { display: inline-block; color: var(--led); }
+.ht-palabra.sale-p { position: absolute; left: 0; top: .14em; animation: palabra-sale .5s var(--salida) forwards; }
+.ht-palabra.entra-p { animation: palabra-entra .85s var(--muelle-suave) both; }
+@keyframes palabra-sale { to { opacity: 0; transform: translateY(-105%); } }
+@keyframes palabra-entra { from { opacity: 0; transform: translateY(105%); } }
+.hero-foto { --fw: min(100vw, (var(--alto) - 370px) * 1.5); grid-area: foto; justify-self: center; position: relative; width: var(--fw); min-width: min(100vw, 250px); aspect-ratio: 3 / 2; margin: 0; overflow: clip; background: var(--noche-2); }
 .hero-foto img { width: 100%; height: 100%; }
 .hero .entradilla { grid-area: entradilla; padding-inline: var(--margen); max-width: calc(34em + 2 * var(--margen)); font-size: clamp(15px, min(4.6vw, 2.15vh), 20px); line-height: 1.6; color: var(--cal); }
 .hero .acciones { grid-area: acciones; padding-inline: var(--margen); gap: 10px 12px; }
@@ -49,70 +56,70 @@
 /* Móvil apaisado: texto a la izquierda, foto a la derecha */
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-marco { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "titulo foto" "entradilla foto" "acciones foto"; align-content: center; column-gap: clamp(16px, 3vw, 32px); row-gap: 10px; padding: var(--hp) var(--margen); }
-  .hero h1, .hero .entradilla, .hero .acciones { padding-inline: 0; }
-  .hero h1 { align-self: end; font-size: clamp(26px, min(9vh, 5.6vw), 50px); }
+  .hero-titulo, .hero .entradilla, .hero .acciones { padding-inline: 0; }
+  .hero-titulo { align-self: end; font-size: clamp(26px, min(9vh, 5.6vw), 50px); }
   .hero .entradilla { font-size: 13.5px; line-height: 1.5; }
   .hero-foto { --fw: min(50vw, (var(--alto) - 2 * var(--hp)) * 1.5); grid-row: 1 / -1; align-self: center; border-radius: 8px; }
   .hero .acciones { gap: 8px 10px; }
   .hero .acciones .btn { min-height: 44px; padding: 0 16px; font-size: 14.5px; }
 }
 
-/* Escritorio y tableta apaisada: la foto tan grande como cabe entera; el texto, sobre su parte baja */
+/* Escritorio y tableta apaisada: el titular gigante arriba, en una línea; debajo, su columna y la foto entera */
 @media (min-width: 900px) and (min-aspect-ratio: 4/3) and (min-height: 501px) {
-  .hero-marco { --fw: min(100vw - 2 * var(--margen), (var(--alto) - 2 * var(--hp)) * 1.5); display: block; width: var(--fw); min-height: 0; padding: 0; margin-block: var(--hp); }
-  .hero-foto { --fw: inherit; width: 100%; min-width: 0; border-radius: 12px; }
-  .hero-texto {
-    position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: grid;
-    grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "titulo titulo" "entradilla acciones"; align-items: end;
-    gap: calc(var(--fw) * .012) calc(var(--fw) * .03);
-    padding: calc(var(--fw) * .1) calc(var(--fw) * .034) calc(var(--fw) * .03);
-    border-radius: 0 0 12px 12px; pointer-events: none;
-    background: linear-gradient(0deg, rgba(15, 19, 31, .92), rgba(15, 19, 31, .78) 42%, rgba(15, 19, 31, 0));
+  .hero-marco {
+    --tt: min(8.1vw, 14vh); --col: clamp(260px, 23vw, 440px); --gap: clamp(28px, 3vw, 60px); --gapv: clamp(14px, 2.4vh, 32px);
+    --fw: min(100vw - 2 * var(--margen) - var(--col) - var(--gap), (var(--alto) - 2 * var(--hp) - var(--tt) * .96 - var(--gapv)) * 1.5);
+    grid-template-columns: var(--col) var(--fw); grid-template-areas: "titulo titulo" "lado foto";
+    justify-content: center; align-content: center; column-gap: var(--gap); row-gap: var(--gapv); padding: var(--hp) var(--margen);
   }
-  .hero-texto > * { pointer-events: auto; }
-  .hero h1 { padding: 0; font-size: calc(var(--fw) * .074); white-space: nowrap; }
-  .hero h1 .linea { display: inline-block; vertical-align: top; }
-  .hero h1 .linea:first-child { margin-right: .24em; }
-  .hero .entradilla { padding: 0; max-width: 30em; font-size: clamp(15px, var(--fw) * .0132, 23px); }
-  .hero .acciones { padding: 0; flex-wrap: nowrap; }
-  .hero .acciones .btn { min-height: clamp(46px, var(--fw) * .04, 64px); padding: 0 clamp(18px, var(--fw) * .018, 32px); font-size: clamp(15px, var(--fw) * .0118, 20px); }
+  .hero-titulo { padding: 0; font-size: var(--tt); white-space: nowrap; }
+  .ht-l1 { display: inline-block; }
+  .hero-lado { grid-area: lado; display: flex; flex-direction: column; gap: clamp(14px, 2.2vh, 26px); min-width: 0; }
+  .hero .entradilla { padding: 0; font-size: clamp(15px, .55vw + 9px, 19px); }
+  .hero .acciones { padding: 0; }
+  .hero-cats { display: block; margin-top: auto; border-top: 1px solid rgba(163, 172, 196, .22); }
+  .hero-foto { --fw: inherit; width: 100%; min-width: 0; border-radius: 12px; }
+  .hero-guia { display: block; }
 }
+/* cuando no hay alto para la lista, se queda la foto con sus etiquetas */
+@media (min-width: 900px) and (max-width: 1199px) and (max-height: 820px) { .hero-cats, .hero-guia { display: none; } }
 
-/* La idea: el boceto (capa aparte, misma encuadre) y la costura de luz que lo convierte en mueble */
-.hf-boceto { position: absolute; inset: 0; z-index: 1; overflow: hidden; transform: translateX(100%); }
-.hf-boceto-in { position: absolute; inset: 0; transform: translateX(-100%); }
-.hf-costura { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; }
-.hf-costura::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1px; width: 3px; background: var(--led); box-shadow: 0 0 18px 4px rgba(243, 217, 164, .75), 0 0 60px 14px rgba(243, 217, 164, .3); }
-.hf-velo { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(15, 19, 31, .28), rgba(15, 19, 31, 0) 22%); }
-.pre .hf-boceto, .pre .hf-boceto-in { transform: none; }
-.entra .hf-boceto { animation: destapar 2s cubic-bezier(.65, 0, .25, 1) .45s both; }
-.entra .hf-boceto-in { animation: destapar-in 2s cubic-bezier(.65, 0, .25, 1) .45s both; }
-.entra .hf-costura { animation: costura-ida 2s cubic-bezier(.65, 0, .25, 1) .45s both; }
-/* «Ver la idea» tapa la foto con el boceto; al volver, la costura lo destapa otra vez */
-.hero.vuelta .hf-boceto { animation: destapar 1.4s cubic-bezier(.65, 0, .25, 1) both; }
-.hero.vuelta .hf-boceto-in { animation: destapar-in 1.4s cubic-bezier(.65, 0, .25, 1) both; }
-.hero.vuelta .hf-costura { animation: costura-ida 1.4s cubic-bezier(.65, 0, .25, 1) both; }
-.hero.idea .hf-boceto { animation: tapar 1.4s cubic-bezier(.65, 0, .25, 1) both; }
-.hero.idea .hf-boceto-in { animation: tapar-in 1.4s cubic-bezier(.65, 0, .25, 1) both; }
-.hero.idea .hf-costura { animation: costura-vuelta 1.4s cubic-bezier(.65, 0, .25, 1) both; }
-@keyframes destapar { from { transform: none; } to { transform: translateX(100%); } }
-@keyframes destapar-in { from { transform: none; } to { transform: translateX(-100%); } }
-@keyframes tapar { from { transform: translateX(100%); } to { transform: none; } }
-@keyframes tapar-in { from { transform: translateX(-100%); } to { transform: none; } }
-@keyframes costura-ida { 0% { transform: none; opacity: 0; } 4%, 94% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
-@keyframes costura-vuelta { 0% { transform: translateX(100%); opacity: 0; } 5%, 94% { opacity: 1; } 100% { transform: none; opacity: 0; } }
+/* Su lista de categorías: cada una se enciende con su mueble */
+.hero-cats li { border-bottom: 1px solid rgba(163, 172, 196, .22); }
+.hc { position: relative; display: flex; align-items: center; gap: 14px; min-height: clamp(46px, 6.2vh, 64px); padding: 4px 0; color: var(--pizarra-clara); text-decoration: none; font: 400 clamp(19px, 1.1vw + 6px, 30px)/1.1 var(--f-titular); transition: color .25s ease; -webkit-tap-highlight-color: transparent; }
+.hc .ic { width: 24px; height: 24px; color: var(--pizarra); transition: transform .55s var(--muelle), color .25s ease; }
+.hc span { transition: transform .6s var(--muelle); }
+.hc:hover span, .hc.activo span { transform: translateX(6px); }
+.hc::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--led); transform: scaleX(0); transform-origin: 0 50%; transition: transform .65s var(--salida); }
+.hc:hover, .hc:focus-visible, .hc.activo { color: var(--blanco); }
+.hc:hover .ic, .hc:focus-visible .ic, .hc.activo .ic { color: var(--led); transform: rotate(-10deg) scale(1.15); }
+.hc.activo::after { transform: scaleX(1); }
+.hc:focus-visible { outline: 2px solid var(--cal); outline-offset: 2px; border-radius: 3px; }
+.hc:active { transform: translateX(3px); }
+/* la línea de luz que une la categoría con su mueble en la foto */
+.hero-guia { position: absolute; z-index: 4; left: 0; top: 0; width: 1px; height: 2px; margin-top: -1px; background: var(--led); box-shadow: 0 0 10px 1px rgba(243, 217, 164, .65); transform-origin: 0 50%; opacity: 0; pointer-events: none; transition: transform .85s var(--muelle-suave), opacity .3s ease; }
+.hero-guia.on { opacity: 1; }
+.hero-guia.sin-t { transition: none; }
 
-/* La lupa: un círculo que enseña la idea bajo el cursor (la foto no se mueve) */
-.lupa { position: absolute; z-index: 1; left: 0; top: 0; width: var(--d); height: var(--d); border-radius: 50%; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .3s ease; box-shadow: 0 0 0 2px var(--led), 0 0 0 9px rgba(243, 217, 164, .16), var(--sombra-flotante); will-change: transform; }
-.lupa.on { opacity: 1; }
-.lupa-in { position: absolute; left: 0; top: 0; }
-.lupa-in img { width: 100%; height: 100%; }
-.lupa::after { content: "La idea"; position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%); padding: 5px 11px; border-radius: 999px; background: var(--led); color: var(--noche); font: 700 12.5px/1 var(--f-texto); white-space: nowrap; }
-.hero.idea .lupa::after { content: "El mueble"; }
+/* La puerta de palillería: lamas de roble que se abren y dejan ver el salón (solo en la entrada) */
+.hf-lamas { position: absolute; inset: 0; z-index: 2; display: none; gap: 3px; perspective: 1400px; pointer-events: none; }
+.pre .hf-lamas, .entra .hf-lamas { display: flex; }
+.hf-lamas i {
+  flex: 1; transform-origin: 50% 50%; backface-visibility: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 236, 205, .22) 0 1.5px, transparent 1.5px calc(100% - 3px), rgba(40, 22, 10, .4) calc(100% - 3px)),
+    repeating-linear-gradient(177deg, rgba(70, 40, 18, .12) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg, #b88757, #9a6a41 46%, #b4824f 78%, #a2724a);
+  box-shadow: 0 0 18px rgba(0, 0, 0, .35);
+}
+.hf-lamas i:nth-child(3n) { filter: brightness(1.06); }
+.hf-lamas i:nth-child(4n + 1) { filter: brightness(.94) saturate(1.05); }
+.entra .hf-lamas i { animation: abrir-lama 1.05s cubic-bezier(.55, 0, .25, 1) calc(.6s + var(--k) * 55ms) both; }
+@keyframes abrir-lama { 0% { transform: none; } 82% { opacity: 1; } 100% { transform: rotateY(88deg); opacity: 0; } }
 
 /* Sus etiquetas: un punto que late sobre cada mueble */
 .pin { position: absolute; z-index: 3; left: var(--x); top: var(--y); width: 44px; height: 44px; margin: -22px 0 0 -22px; display: grid; place-items: center; border-radius: 50%; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-.pin-punto { position: relative; width: 18px; height: 18px; border-radius: 50%; background: var(--blanco); box-shadow: 0 0 0 5px rgba(15, 19, 31, .3), 0 4px 14px rgba(15, 19, 31, .45); transition: transform .5s var(--muelle); }
+.pin-punto { position: relative; width: 18px; height: 18px; border-radius: 50%; background: var(--blanco); box-shadow: 0 0 0 5px rgba(15, 19, 31, .3), 0 4px 14px rgba(15, 19, 31, .45); transition: transform .5s var(--muelle), background-color .25s ease; }
 .pin-punto::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--led); animation: latir 2.4s cubic-bezier(.2, .6, .35, 1) infinite; }
 @keyframes latir { from { transform: scale(1); opacity: .95; } to { transform: scale(2.9); opacity: 0; } }
 .hero-fuera .pin-punto::after { animation-play-state: paused; }
@@ -124,31 +131,18 @@
 .pin-izq .pin-eti { left: auto; right: calc(100% - 4px); bottom: auto; top: 50%; transform: translate(10px, -50%) scale(.8); transform-origin: 100% 50%; }
 .pin-izq:hover .pin-eti, .pin-izq:focus-visible .pin-eti, .pin-izq.activo .pin-eti { transform: translate(0, -50%) scale(1); }
 
-.ver-idea { position: absolute; z-index: 3; top: clamp(10px, 1.6vw, 22px); right: clamp(10px, 1.6vw, 22px); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 14px; border-radius: 999px; background: rgba(15, 19, 31, .74); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--cal); font: 700 14px/1 var(--f-texto); box-shadow: inset 0 0 0 1px rgba(227, 231, 240, .3); transition: transform .5s var(--muelle), background-color .2s ease, color .2s ease; }
-.ver-idea:hover { background: var(--cal); color: var(--noche); transform: translateY(-2px); }
-.ver-idea:hover .ic { transform: rotate(-18deg); }
-.ver-idea .ic { transition: transform .5s var(--muelle); }
-.ver-idea:active { transform: scale(.95); }
-.ver-idea:focus-visible { outline: 2px solid var(--blanco); outline-offset: 2px; }
-.ver-idea[aria-pressed="true"] { background: var(--led); color: var(--noche); }
-
-/* Entrada: antes de construirse, texto y etiquetas esperan; luego entran tras la costura */
-.pre .hero .linea > .a { transform: translateY(110%); }
-.pre .hero .entradilla.a, .pre .hero .acciones .a { opacity: 0; transform: translateY(22px); }
+/* Entrada: el titular sube letra a letra; la puerta se abre; después, la columna y las etiquetas */
+.pre .hero-titulo:not(.partido) { opacity: 0; }
+.pre .ht-ch { opacity: 0; transform: translateY(70%) rotate(8deg); }
+.pre .ht-giro .ht-palabra { opacity: 0; transform: translateY(105%); }
+.pre .hero .a { opacity: 0; transform: translateY(22px); }
 .pre .pin { opacity: 0; transform: scale(0); }
-.pre .ver-idea { opacity: 0; transform: translateY(-10px); }
-.entra .hero .linea > .a { transition: transform 1.1s var(--muelle-suave); }
-.entra .hero h1 .linea:nth-child(1) > .a { transition-delay: 1.05s; }
-.entra .hero h1 .linea:nth-child(2) > .a { transition-delay: 1.17s; }
-.entra .hero .entradilla.a { transition: opacity .7s ease 1.4s, transform 1s var(--muelle-suave) 1.4s; }
-.entra .hero .acciones .a { transition: opacity .6s ease, transform .9s var(--muelle); }
-.entra .hero .acciones .a:nth-child(1) { transition-delay: 1.55s; }
-.entra .hero .acciones .a:nth-child(2) { transition-delay: 1.63s; }
-.entra .hero .acciones .a:nth-child(3) { transition-delay: 1.71s; }
+.entra .ht-ch { transition: opacity .45s ease, transform 1s var(--muelle-suave); transition-delay: calc(.1s + var(--c) * 32ms); }
+.entra .ht-giro .ht-palabra { transition: opacity .45s ease .55s, transform 1s var(--muelle-suave) .55s; }
+.entra .hero .a { transition: opacity .6s ease, transform .9s var(--muelle); transition-delay: calc(1.05s + var(--d, 0) * 80ms); }
 .entra .pin { transition: opacity .3s ease, transform .8s var(--muelle); }
-.entra .pin:nth-of-type(1) { transition-delay: 2.15s; } .entra .pin:nth-of-type(2) { transition-delay: 2.27s; }
-.entra .pin:nth-of-type(3) { transition-delay: 2.39s; } .entra .pin:nth-of-type(4) { transition-delay: 2.51s; }
-.entra .ver-idea { transition: opacity .4s ease 2.6s, transform .6s var(--muelle) 2.6s, background-color .2s ease, color .2s ease; }
+.entra .pin:nth-of-type(1) { transition-delay: 1.9s; } .entra .pin:nth-of-type(2) { transition-delay: 2.02s; }
+.entra .pin:nth-of-type(3) { transition-delay: 2.14s; } .entra .pin:nth-of-type(4) { transition-delay: 2.26s; }
 
 /* =====================================================================
    2 · INTRO · su texto, en grande; las palabras se encienden al leer
@@ -174,8 +168,9 @@
 .filosofia .entrada { color: var(--cal); }
 
 /* =====================================================================
-   4 · PROYECTOS PERSONALIZADOS · la idea y el sofá, uno sobre otro:
-   el cursor (o el dedo) mueve la costura
+   4 · PROYECTOS PERSONALIZADOS · su sofá, guardado tras dos puertas de
+   armario lacadas que se abren hacia ti al llegar; al pasar el cursor,
+   la foto se acerca
    ===================================================================== */
 .proyectos { background: var(--s-cal); padding: var(--seccion) 0; overflow: clip; }
 .proyectos-rejilla { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(40px, 5vw, 88px); align-items: center; }
@@ -187,23 +182,26 @@
 :root[data-theme="dark"] .proyectos-logo { fill: var(--cal); }
 .proyectos .entrada { margin-top: var(--e5); }
 .proyectos .botones { margin-top: var(--e6); }
-.comparador { --p: .5; position: relative; isolation: isolate; margin: 0; aspect-ratio: 16 / 9; border-radius: 12px; overflow: clip; box-shadow: var(--sombra-flotante); cursor: ew-resize; touch-action: pan-y; }
-.comparador > img, .cmp-boceto-in img { width: 100%; height: 100%; }
-.cmp-boceto { position: absolute; inset: 0; overflow: hidden; transform: translateX(calc((var(--p) - 1) * 100%)); }
-.cmp-boceto-in { position: absolute; inset: 0; transform: translateX(calc((1 - var(--p)) * 100%)); }
-.cmp-asa { position: absolute; inset: 0; z-index: 2; pointer-events: none; transform: translateX(calc(var(--p) * 100%)); }
-.cmp-asa::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1.5px; width: 3px; background: var(--led); box-shadow: 0 0 16px 3px rgba(243, 217, 164, .6); }
-.cmp-asa > span { position: absolute; left: 0; top: 50%; display: flex; align-items: center; justify-content: center; gap: 2px; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: var(--led); color: var(--noche); box-shadow: var(--sombra-flotante); transition: transform .45s var(--muelle); }
-.cmp-asa .ic { width: 18px; height: 18px; stroke-width: 2.2; }
-.comparador:hover .cmp-asa > span { transform: scale(1.12); }
-.comparador:active .cmp-asa > span { transform: scale(.94); }
-.cmp-eti { position: absolute; z-index: 2; top: clamp(10px, 1.6vw, 20px); padding: 8px 14px; border-radius: 999px; font: 700 14px/1 var(--f-texto); pointer-events: none; }
-.cmp-eti-idea { left: clamp(10px, 1.6vw, 20px); background: var(--noche); color: var(--cal); opacity: clamp(0, calc(var(--p) * 3 - .3), 1); }
-.cmp-eti-mueble { right: clamp(10px, 1.6vw, 20px); background: var(--cal); color: var(--noche); opacity: clamp(0, calc((1 - var(--p)) * 3 - .3), 1); }
-.cmp-rango { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
-.comparador:has(.cmp-rango:focus-visible) { outline: 3px solid var(--pizarra); outline-offset: 4px; }
-.js:not(.ss) .comparador.revelar:not(.visto) { opacity: 0; transform: translateY(40px) scale(.96); }
-.comparador.revelar { transition: opacity .7s ease, transform 1.1s var(--muelle-suave); }
+.armario { position: relative; margin: 0; perspective: 1600px; }
+.armario-foto { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: clip; box-shadow: var(--sombra-flotante); background: var(--noche-2); }
+.armario-foto img { width: 100%; height: 100%; transition: transform 1.3s var(--muelle-suave); }
+.armario:hover .armario-foto img { transform: scale(1.05); }
+.hoja { position: absolute; z-index: 2; top: 0; bottom: 0; width: 50%; backface-visibility: hidden; pointer-events: none; display: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .05) 62%, rgba(0, 0, 0, .18)),
+    linear-gradient(180deg, #2a3248, #1b2133 60%, #222a3d);
+  box-shadow: inset 0 0 0 1px rgba(163, 172, 196, .14);
+}
+.p-iz { left: 0; border-radius: 12px 0 0 12px; transform-origin: 0 50%; }
+.p-de { right: 0; border-radius: 0 12px 12px 0; transform-origin: 100% 50%; }
+/* el tirador, con la luz de sus leds */
+.hoja::after { content: ""; position: absolute; top: 38%; height: 24%; width: 4px; border-radius: 3px; background: var(--led); box-shadow: 0 0 14px rgba(243, 217, 164, .55); }
+.p-iz::after { right: 16px; } .p-de::after { left: 16px; }
+.js:not(.ss) .hoja { display: block; }
+.armario.visto .hoja { transition: transform 1.5s cubic-bezier(.6, .04, .22, 1) .25s, opacity .5s ease 1.25s; }
+.armario.visto .p-iz { transform: rotateY(-100deg); opacity: 0; }
+.armario.visto .p-de { transform: rotateY(100deg); opacity: 0; }
+
 
 /* =====================================================================
    5 · CADA CENTÍMETRO CUENTA · la estantería de sus trabajos reales:
@@ -250,6 +248,8 @@
 .catalogo { position: relative; background: var(--s-niebla); padding: var(--seccion) 0; }
 .catalogo-cabeza { display: grid; gap: var(--e4); margin-bottom: clamp(32px, 5vw, 72px); }
 @media (min-width: 1000px) { .catalogo-cabeza { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--e7); } }
+.cat-titulo-ic { display: inline-block; width: .62em; height: .62em; margin-left: .22em; vertical-align: .02em; color: var(--pizarra); stroke-width: 1.3; transition: transform .7s var(--muelle); }
+.catalogo-cabeza:hover .cat-titulo-ic { transform: rotate(-12deg) scale(1.12); }
 .indice { border-top: 1px solid var(--borde); }
 .cat { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) clamp(96px, 30%, 220px); align-items: center; gap: 14px 18px; border-bottom: 1px solid var(--borde); }
 .cat-fila { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: clamp(22px, 3vw, 36px) 0; color: inherit; text-align: left; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: opacity .35s ease; }
@@ -425,28 +425,29 @@
 .mesas .botones { margin-top: var(--e5); }
 .mesa-cta-nombre { font-weight: 800; }
 .orbita { display: grid; justify-items: center; gap: var(--e5); }
-.orb-campo { position: relative; width: min(100%, 760px); aspect-ratio: 1; container-type: inline-size; }
-.orb-centro { position: absolute; inset: 19%; }
+/* el campo es más ancho que alto: la foto es un óvalo (se ve la mesa entera) y los modelos giran en elipse */
+.orb-campo { position: relative; width: min(100%, 820px); aspect-ratio: 1.42; container-type: inline-size; }
+.orb-centro { position: absolute; left: 50%; top: 50%; width: 64cqi; aspect-ratio: 1.6; translate: -50% -50%; }
 .orb-foto { position: relative; width: 100%; height: 100%; border-radius: 50%; overflow: clip; isolation: isolate; background: var(--noche-3); box-shadow: 0 0 0 10px rgba(243, 217, 164, .07), 0 30px 80px -20px rgba(0, 0, 0, .6); }
-.mesa-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.12); transition: opacity .6s ease, transform 1.2s var(--muelle-suave); }
-.mesa-img[data-modelo="cubo"] { object-position: 32% 55%; }
+.mesa-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); transition: opacity .6s ease, transform 1.2s var(--muelle-suave); }
+.mesa-img[data-modelo="cubo"] { object-position: 34% 55%; }
 .mesa-img.activa { opacity: 1; transform: none; }
-.orb-aro { position: absolute; inset: -9%; border-radius: 50%; border: 1.5px dashed rgba(243, 217, 164, .4); animation: girar 70s linear infinite reverse; }
-.orb-campo::before { content: ""; position: absolute; inset: 4%; border-radius: 50%; border: 1px solid rgba(163, 172, 196, .2); }
+.orb-aro { position: absolute; inset: -7%; border-radius: 50%; border: 1.5px dashed rgba(243, 217, 164, .4); }
+.orb-campo::before { content: ""; position: absolute; left: 50%; top: 50%; width: 94cqi; height: 62cqi; translate: -50% -50%; border-radius: 50%; border: 1px solid rgba(163, 172, 196, .2); }
 @keyframes girar { to { transform: rotate(360deg); } }
-@keyframes girar-contra { to { transform: rotate(-360deg); } }
-.orb-anillo { position: absolute; inset: 0; animation: girar 96s linear infinite; }
-.orb-anillo li { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateX(46cqi) rotate(calc(-1 * var(--a))); }
-.orb-modelo { position: absolute; left: 0; top: 0; translate: -50% -50%; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--noche); color: var(--cal); font: 700 15px/1 var(--f-texto); white-space: nowrap; box-shadow: inset 0 0 0 1.5px rgba(163, 172, 196, .35), 0 8px 20px rgba(0, 0, 0, .3); animation: girar-contra 96s linear infinite; transition: scale .5s var(--muelle), background-color .2s ease, color .2s ease; -webkit-tap-highlight-color: transparent; }
+@property --g { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@keyframes orbitar { to { --g: 360deg; } }
+.orb-anillo { position: absolute; inset: 0; animation: orbitar 96s linear infinite; }
+.orb-anillo li { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: translate(calc(cos(var(--a) + var(--g)) * 47cqi), calc(sin(var(--a) + var(--g)) * 31cqi)); }
+.orb-modelo { position: absolute; left: 0; top: 0; translate: -50% -50%; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--noche); color: var(--cal); font: 700 15px/1 var(--f-texto); white-space: nowrap; box-shadow: inset 0 0 0 1.5px rgba(163, 172, 196, .35), 0 8px 20px rgba(0, 0, 0, .3); transition: scale .5s var(--muelle), background-color .2s ease, color .2s ease; -webkit-tap-highlight-color: transparent; }
 .orb-modelo[data-modelo]::before { content: ""; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: var(--led); }
 .orb-modelo:hover, .orb-modelo:focus-visible { background: var(--cal); color: var(--noche); scale: 1.12; }
 .orb-modelo:active { scale: .95; }
 .orb-modelo:focus-visible { outline: 2px solid var(--cal); outline-offset: 3px; }
 .orb-modelo.elegido { background: var(--led); color: var(--noche); box-shadow: 0 0 0 5px rgba(243, 217, 164, .2), 0 8px 20px rgba(0, 0, 0, .3); }
 .orb-modelo.elegido::before { background: var(--noche); }
-.orbita:hover .orb-anillo, .orbita:hover .orb-modelo, .orbita:focus-within .orb-anillo, .orbita:focus-within .orb-modelo,
-.mesas.fuera .orb-anillo, .mesas.fuera .orb-modelo, .mesas.fuera .orb-aro { animation-play-state: paused; }
-.mesa-sin-foto { position: absolute; inset: 0; display: grid; place-items: center; padding: 18%; background: radial-gradient(circle at 50% 40%, var(--basalto), var(--noche) 75%); color: var(--blanco); font: 400 clamp(30px, 7cqi, 60px)/1 var(--f-titular); text-align: center; opacity: 0; transform: scale(.9); transition: opacity .5s ease, transform .9s var(--muelle); }
+.orbita:hover .orb-anillo, .orbita:focus-within .orb-anillo, .mesas.fuera .orb-anillo { animation-play-state: paused; }
+.mesa-sin-foto { position: absolute; inset: 0; display: grid; place-items: center; padding: 12% 18%; background: radial-gradient(circle at 50% 40%, var(--basalto), var(--noche) 75%); color: var(--blanco); font: 400 clamp(30px, 6cqi, 56px)/1 var(--f-titular); text-align: center; opacity: 0; transform: scale(.9); transition: opacity .5s ease, transform .9s var(--muelle); }
 .orb-foto.sin .mesa-sin-foto { opacity: 1; transform: none; }
 .orb-bajo { display: grid; justify-items: center; gap: var(--e4); min-height: 96px; text-align: center; }
 .orb-pie { max-width: 34em; font: 400 clamp(20px, .9rem + .8vw, 28px)/1.25 var(--f-titular); color: var(--blanco); }
@@ -463,15 +464,15 @@
 .js:not(.ss) .orbita:not(.visto) .orb-anillo li { opacity: 0; }
 .orbita .orb-foto { transition: opacity .7s ease, transform 1.3s var(--muelle-suave); }
 .orbita .orb-anillo li { transition: opacity .8s ease .35s; }
-/* móvil: la foto redonda y los modelos debajo, quietos */
+/* móvil: la foto en óvalo y los modelos debajo, quietos */
 @media (max-width: 699px) {
   .orb-campo { aspect-ratio: auto; container-type: normal; display: grid; gap: var(--e5); }
   .orb-campo::before { display: none; }
-  .orb-centro { position: relative; inset: auto; width: 82%; aspect-ratio: 1; justify-self: center; }
-  .orb-aro { inset: -5%; }
+  .orb-centro { position: relative; left: auto; top: auto; translate: none; width: 92%; justify-self: center; }
+  .orb-aro { inset: -4%; }
   .orb-anillo { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; animation: none; }
   .orb-anillo li { position: static; width: auto; height: auto; transform: none; }
-  .orb-modelo { position: static; translate: none; animation: none; padding: 0 14px; font-size: 14px; }
+  .orb-modelo { position: static; translate: none; padding: 0 14px; font-size: 14px; }
 }
 
 /* =====================================================================
@@ -604,7 +605,7 @@ html:not(.js) .nosotros mark::after { transform: scaleX(1); }
    ===================================================================== */
 html:not(.js) .ficha { grid-area: auto; visibility: visible; opacity: 1; margin-bottom: 48px; }
 html:not(.js) .ficha-foto, html:not(.js) .ficha-datos > * { transform: none; opacity: 1; }
-html:not(.js) .esc-nombre, html:not(.js) .lupa, html:not(.js) .ver-idea, html:not(.js) .lupa-tela { display: none; }
+html:not(.js) .esc-nombre, html:not(.js) .lupa-tela { display: none; }
 html:not(.js) .cartas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; margin-bottom: 18px; }
 html:not(.js) .tipo { display: block; }
 @media (max-width: 899px) { html:not(.js) .pin-eti { opacity: 1; clip-path: inset(50%); } }
@@ -614,14 +615,14 @@ html:not(.js) .tipo { display: block; }
 }
 html:not(.js) .hueco-pie { opacity: 1; transform: none; }
 .ss .lema-inversa { transform: translateX(-50%); }
-.quieto .orb-anillo, .quieto .orb-modelo, .quieto .orb-aro, .quieto .sello-aro { animation: none; }
+.quieto .orb-anillo, .quieto .sello-aro { animation: none; }
 @media (prefers-reduced-motion: reduce) and (min-width: 900px) {
   .pin-eti { opacity: 1; transform: translate(-50%, 0) scale(1); }
   .pin-izq .pin-eti { transform: translate(0, -50%) scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hueco-pie { opacity: 1; transform: none; }
-  .orb-anillo, .orb-modelo, .orb-aro, .sello-aro, .pin-punto::after { animation: none !important; }
+  .orb-anillo, .sello-aro, .pin-punto::after { animation: none !important; }
 }
 
 /* Visor con una sola imagen (los planos): sin flechas */
