@@ -1,5 +1,5 @@
 /* =====================================================================
-   TIKAL MUEBLES · main.js · v2 «De la idea al mueble»
+   TIKAL MUEBLES · main.js · v3
    Sin dependencias. Con ?ss (capturas) o movimiento reducido: todo
    visible y quieto. Sin JS, la página se lee entera.
    ===================================================================== */
@@ -16,15 +16,19 @@
   const foto = $('.hero-foto', hero);
   const real = $('.hf-real', hero);
 
-  /* ---------- 1 · Entrada: el boceto se convierte en el mueble cuando fuente y fotos están listas ---------- */
+  /* ---------- 1 · Entrada: el titular sube letra a letra y la puerta de palillería abre sus lamas ---------- */
+  if (!quieto) {
+    let c = 0;
+    $$('.ht-l1, .ht-tus', hero).forEach(el => { el.innerHTML = [...el.textContent].map(ch => `<span class="ht-ch" style="--c:${c++}">${ch}</span>`).join(''); });
+    $('.hero-titulo', hero).classList.add('partido');
+  }
   let terminada = false;
   const terminarEntrada = () => {
     if (terminada) return; terminada = true;
-    setTimeout(() => { html.classList.remove('entra'); html.classList.add('listo'); hero.dispatchEvent(new Event('listo')); }, 3500);
+    setTimeout(() => { html.classList.remove('entra'); html.classList.add('listo'); hero.dispatchEvent(new Event('listo')); }, 3300);
   };
   if (html.classList.contains('pre') || html.classList.contains('entra')) {
-    const dec = im => (im && im.decode ? im.decode().catch(() => {}) : null);
-    const listo = Promise.all([document.fonts.ready, dec(real), dec($('.hf-boceto img', hero))]);
+    const listo = Promise.all([document.fonts.ready, real.decode ? real.decode().catch(() => {}) : null]);
     Promise.race([listo, new Promise(r => setTimeout(r, 1500))]).then(() => requestAnimationFrame(() => {
       if (html.classList.contains('pre')) { html.classList.remove('pre'); html.classList.add('entra'); }
       terminarEntrada();
@@ -48,73 +52,71 @@
   new IntersectionObserver(([e]) => html.classList.toggle('ver-fijos', !e.isIntersecting && e.boundingClientRect.top < 0)).observe($('.acciones', hero));
   new IntersectionObserver(([e]) => html.classList.toggle('en-contacto', e.isIntersecting), { threshold: .2 }).observe($('#contacto'));
 
-  /* ---------- 4 · Hero: la lupa enseña la idea bajo el cursor; «Ver la idea» la devuelve entera ---------- */
-  const lupa = $('.lupa', hero), lupaIn = $('.lupa-in', lupa), lupaImg = $('img', lupaIn);
-  const bocetoSrc = lupaImg.getAttribute('src');
-  let W = 0, H = 0, D = 0;
-  const medirFoto = () => { const r = foto.getBoundingClientRect(); W = r.width; H = r.height; D = lupa.offsetWidth; lupaIn.style.width = W + 'px'; lupaIn.style.height = H + 'px'; };
-  if ('ResizeObserver' in window) new ResizeObserver(medirFoto).observe(foto); else addEventListener('resize', medirFoto);
-  medirFoto();
-  let tx = 0, ty = 0, lx = 0, ly = 0, rafL = 0, dentro = false, demo = 0;
-  const pintarLupa = () => {
-    const k = quieto ? 1 : .24;
-    lx += (tx - lx) * k; ly += (ty - ly) * k;
-    lupa.style.transform = `translate3d(${(lx - D / 2).toFixed(1)}px, ${(ly - D / 2).toFixed(1)}px, 0)`;
-    lupaIn.style.transform = `translate3d(${(D / 2 - lx).toFixed(1)}px, ${(D / 2 - ly).toFixed(1)}px, 0)`;
-    rafL = (Math.abs(tx - lx) > .3 || Math.abs(ty - ly) > .3) ? requestAnimationFrame(pintarLupa) : 0;
+  /* ---------- 4 · Hero: el titular sube letra a letra; su palabra final cambia con el mueble que se señala ---------- */
+  const titulo = $('.hero-titulo', hero);
+  const giro = $('.ht-giro', titulo);
+  let palabra = $('.ht-palabra', giro);
+  const PALABRA = { librerias: 'librerías', muebles: 'muebles', sofas: 'sofás', mesas: 'mesas' };
+  const ponerPalabra = txt => {
+    if (palabra.textContent === txt) return;
+    if (quieto) { palabra.textContent = txt; return; }
+    const vieja = palabra, nueva = document.createElement('span');
+    nueva.className = 'ht-palabra entra-p'; nueva.textContent = txt;
+    vieja.classList.remove('entra-p'); vieja.classList.add('sale-p');
+    giro.append(nueva); palabra = nueva;
+    setTimeout(() => vieja.remove(), 650);
   };
-  const moverLupa = (x, y, salto) => { tx = x; ty = y; if (salto) { lx = x; ly = y; } if (!rafL) rafL = requestAnimationFrame(pintarLupa); };
+
+  /* ---------- 5 · Recorrido por sus muebles: etiqueta en la foto, categoría en la lista y su línea de luz ---------- */
+  const pins = $$('.pin', hero), cats = $$('.hc', hero), guia = $('.hero-guia', hero), marco = $('.hero-marco', hero);
+  let actual = null, guiaVisible = false;
+  const trazarGuia = () => {
+    const hc = cats.find(c => c.dataset.cat === actual), pin = pins.find(p => p.dataset.cat === actual);
+    if (!hc || !pin || getComputedStyle(guia).display === 'none' || !hc.offsetParent) { guia.classList.remove('on'); guiaVisible = false; return; }
+    const m = marco.getBoundingClientRect(), a = hc.getBoundingClientRect(), b = pin.getBoundingClientRect();
+    const ax = a.right - m.left + 8, ay = a.top + a.height / 2 - m.top;
+    const dx = b.left + b.width / 2 - m.left - ax, dy = b.top + b.height / 2 - m.top - ay;
+    const largo = Math.max(0, Math.hypot(dx, dy) - 16), ang = Math.atan2(dy, dx);
+    const base = `translate(${ax.toFixed(1)}px, ${ay.toFixed(1)}px) rotate(${ang.toFixed(4)}rad)`;
+    if (!guiaVisible) { guia.classList.add('sin-t'); guia.style.transform = `${base} scaleX(0)`; void guia.offsetWidth; guia.classList.remove('sin-t'); }
+    guia.style.transform = `${base} scaleX(${largo.toFixed(1)})`;
+    guia.classList.add('on'); guiaVisible = true;
+  };
+  const activar = cat => {
+    if (cat === actual) return;
+    actual = cat;
+    pins.forEach(p => p.classList.toggle('activo', p.dataset.cat === cat));
+    cats.forEach(c => c.classList.toggle('activo', c.dataset.cat === cat));
+    ponerPalabra(cat ? PALABRA[cat] : 'ideas');
+    trazarGuia();
+  };
+  addEventListener('resize', () => { guiaVisible = false; trazarGuia(); });
+  let manual = false, paso = -1;
+  const tomar = cat => { manual = true; activar(cat); };
+  const soltar = () => { manual = false; };
+  [...pins, ...cats].forEach(el => {
+    el.addEventListener('pointerenter', () => tomar(el.dataset.cat));
+    el.addEventListener('pointerleave', soltar);
+    el.addEventListener('focus', () => tomar(el.dataset.cat));
+    el.addEventListener('blur', soltar);
+  });
+  /* con el cursor sobre la foto, se señala el mueble más cercano (la foto no se mueve) */
   if (fino && !ss) {
     foto.addEventListener('pointermove', e => {
-      if (e.pointerType !== 'mouse') return;
-      if (demo) { cancelAnimationFrame(demo); demo = 0; }
+      if (e.pointerType !== 'mouse' || e.target.closest('.pin')) return;
       const r = foto.getBoundingClientRect();
-      const sobreMando = e.target.closest('.pin, .ver-idea');
-      lupa.classList.toggle('on', !sobreMando);
-      moverLupa(e.clientX - r.left, e.clientY - r.top, !dentro);
-      dentro = true;
+      let mejor = null, dist = r.width * .2;
+      pins.forEach(p => { const b = p.getBoundingClientRect(), d = Math.hypot(b.left + b.width / 2 - e.clientX, b.top + b.height / 2 - e.clientY); if (d < dist) { dist = d; mejor = p.dataset.cat; } });
+      manual = true; activar(mejor);
     });
-    foto.addEventListener('pointerleave', () => { dentro = false; lupa.classList.remove('on'); });
-    /* una vez construido, la lupa hace un recorrido corto para enseñarse (si nadie ha movido el cursor) */
-    if (!quieto) hero.addEventListener('listo', () => setTimeout(() => {
-      if (dentro || html.classList.contains('hero-fuera')) return;
-      const ruta = [[.2, .34], [.36, .42], [.54, .4], [.7, .3], [.82, .36]];
-      const t0 = performance.now(), dur = 3600;
-      const paso = t => {
-        const u = limitar((t - t0) / dur, 0, 1), s = u * (ruta.length - 1), i = Math.min(ruta.length - 2, Math.floor(s)), f = s - i;
-        const e = f * f * (3 - 2 * f);
-        moverLupa(W * (ruta[i][0] + (ruta[i + 1][0] - ruta[i][0]) * e), H * (ruta[i][1] + (ruta[i + 1][1] - ruta[i][1]) * e), u === 0);
-        if (u === 0) lupa.classList.add('on');
-        if (u < 1 && !dentro) demo = requestAnimationFrame(paso); else { demo = 0; if (!dentro) lupa.classList.remove('on'); }
-      };
-      demo = requestAnimationFrame(paso);
-    }, 500));
+    foto.addEventListener('pointerleave', soltar);
   }
-  const verIdea = $('.ver-idea', hero);
-  verIdea.addEventListener('click', () => {
-    const idea = !hero.classList.contains('idea');
-    hero.classList.add('vuelta'); hero.classList.toggle('idea', idea);
-    verIdea.setAttribute('aria-pressed', String(idea));
-    $('span', verIdea).textContent = idea ? 'Ver el mueble' : 'Ver la idea';
-    lupaImg.src = idea ? (real.currentSrc || real.src) : bocetoSrc;
-  });
-
-  /* ---------- 5 · Sus etiquetas: un recorrido lento por cada mueble cuando nadie toca ---------- */
-  const pins = $$('.pin', hero);
-  let manual = false, paso = -1;
-  const activar = cat => pins.forEach(p => p.classList.toggle('activo', p.dataset.cat === cat));
-  pins.forEach(p => {
-    p.addEventListener('pointerenter', () => { manual = true; activar(p.dataset.cat); });
-    p.addEventListener('pointerleave', () => { manual = false; activar(null); });
-    p.addEventListener('focus', () => { manual = true; activar(p.dataset.cat); });
-    p.addEventListener('blur', () => { manual = false; activar(null); });
-  });
   if (!quieto) {
     const recorrer = () => {
-      if (!manual && !html.classList.contains('hero-fuera') && !demo) { paso = (paso + 1) % (pins.length + 1); activar(pins[paso] ? pins[paso].dataset.cat : null); }
-      setTimeout(recorrer, paso === pins.length - 1 ? 4000 : 2400);
+      if (!manual && !html.classList.contains('hero-fuera') && !document.hidden) { paso = (paso + 1) % (pins.length + 1); activar(pins[paso] ? pins[paso].dataset.cat : null); }
+      setTimeout(recorrer, paso === pins.length ? 3400 : 2600);
     };
-    hero.addEventListener('listo', () => setTimeout(recorrer, 4600));
+    hero.addEventListener('listo', () => setTimeout(recorrer, 900));
   }
 
   /* ---------- 6 · Su interruptor Claro / Oscuro ---------- */
@@ -173,8 +175,16 @@
   let lista = [], idx = 0, origen = null;
   const pintarVisor = () => {
     const f = lista[idx];
-    vFoto.src = f.src; vFoto.alt = f.t; vTitulo.textContent = f.t; vCuenta.textContent = lista.length > 1 ? `${idx + 1} / ${lista.length}` : '';
-    vFoto.style.animation = 'none'; void vFoto.offsetWidth; vFoto.style.animation = '';
+    vCuenta.textContent = lista.length > 1 ? `${idx + 1} / ${lista.length}` : '';
+    const poner = () => {
+      if (lista[idx] !== f) return;
+      vFoto.src = f.src; vFoto.alt = f.t; vTitulo.textContent = f.t;
+      if (!quieto) reiniciar(vFoto, 'cambia');
+    };
+    const pre = new Image(); pre.src = f.src;
+    (pre.decode ? pre.decode() : Promise.resolve()).then(poner, poner);
+    /* y las vecinas, para que la próxima pase al instante */
+    if (lista.length > 1) [1, -1].forEach(d => { new Image().src = lista[(idx + d + lista.length) % lista.length].src; });
   };
   const abrirVisor = (serie, i = 0, desde = null) => {
     lista = Array.isArray(serie) ? serie : (SERIES[serie] || []); if (!lista.length) return;
@@ -234,23 +244,12 @@
     requestAnimationFrame(bucle);
   }
 
-  /* ---------- 11 · Proyectos: la costura entre la idea y el sofá sigue al cursor (o al dedo) ---------- */
-  const cmp = $('[data-comparador]');
-  if (cmp) {
-    const rango = $('.cmp-rango', cmp);
-    let p = .5, objetivo = .5, rafC = 0, tocado = false, suave = .14;
-    const animarC = () => { p += (objetivo - p) * (quieto ? 1 : suave); cmp.style.setProperty('--p', p.toFixed(4)); rafC = Math.abs(objetivo - p) > .0008 ? requestAnimationFrame(animarC) : 0; };
-    const ir = (v, k = .14) => { objetivo = limitar(v, 0, 1); suave = k; if (!rafC) rafC = requestAnimationFrame(animarC); };
-    rango.addEventListener('input', () => { tocado = true; ir(rango.value / 100); });
-    if (fino) cmp.addEventListener('pointermove', e => {
-      if (e.pointerType !== 'mouse') return;
-      tocado = true;
-      const r = cmp.getBoundingClientRect(), v = (e.clientX - r.left) / r.width;
-      rango.value = Math.round(v * 100); ir(v);
-    });
-    if (!quieto) cmp.addEventListener('visto', () => {
-      [[.1, 600], [.9, 2100], [.5, 3600]].forEach(([v, t]) => setTimeout(() => { if (!tocado) { ir(v, .045); rango.value = Math.round(v * 100); } }, t));
-    });
+  /* ---------- 11 · Proyectos: las puertas del armario se abren cuando el sofá se ve al menos a la mitad ---------- */
+  const armario = $('[data-armario]');
+  if (ss || !('IntersectionObserver' in window)) armario.classList.add('visto');
+  else {
+    const ioA = new IntersectionObserver(([e]) => { if (e.intersectionRatio >= .55) { armario.classList.add('visto'); ioA.disconnect(); } }, { threshold: [.55, .8] });
+    ioA.observe(armario);
   }
 
   /* ---------- 12 · Cada centímetro cuenta: la estantería se desliza sola, despacio; se para con el cursor ---------- */
@@ -304,26 +303,24 @@
       rafF = (Math.abs(mx - fx) > .3 || Math.abs(my - fy) > .3 || Math.abs(giro) > .05) ? requestAnimationFrame(moverF) : 0;
     };
     const elegirCat = i => { if (i === activo) return; activo = i; fotos.forEach((im, k) => im.classList.toggle('activa', k === i)); };
-    const apuntar = (x, y, salto) => {
-      const im = fotos[activo]; const w = im ? im.getBoundingClientRect().width || 360 : 360;
-      mx = Math.min(x + 40 + w / 2, innerWidth - w / 2 - 20); my = y;
+    let cx = 0, cy = 0, dentroCat = false;
+    const apuntar = (li, salto) => {
+      const im = fotos[activo], w = im ? im.getBoundingClientRect().width || 360 : 360;
+      const izq = li.querySelector('.cat-nombre').getBoundingClientRect().left, der = li.querySelector('.cat-ir').getBoundingClientRect().left - 32;
+      mx = limitar(cx + 40 + w / 2, izq + w / 2, der - w / 2); my = cy;
       if (salto) { fx = mx; fy = my; }
       if (!rafF) rafF = requestAnimationFrame(moverF);
     };
-    let dentroCat = false;
-    indice.addEventListener('pointermove', e => {
-      if (e.pointerType !== 'mouse') return;
-      const li = e.target.closest('.cat'); if (!li) return;
-      elegirCat(cats.indexOf(li));
-      apuntar(e.clientX, e.clientY, !dentroCat);
+    const esconder = () => { dentroCat = false; catSec.classList.remove('flota'); };
+    const seguir = el => {
+      const li = el && el.closest('.cat');
+      if (!li || !indice.contains(li) || el.closest('.cat-ir')) { esconder(); return; }
+      elegirCat(cats.indexOf(li)); apuntar(li, !dentroCat);
       dentroCat = true; catSec.classList.add('flota');
-    });
-    indice.addEventListener('pointerleave', () => { dentroCat = false; catSec.classList.remove('flota'); });
-    addEventListener('scroll', () => {
-      if (!dentroCat) return;
-      const el = document.elementFromPoint(mx - 60, my); const li = el && el.closest('.cat');
-      if (li) elegirCat(cats.indexOf(li)); else { dentroCat = false; catSec.classList.remove('flota'); }
-    }, { passive: true });
+    };
+    indice.addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; cx = e.clientX; cy = e.clientY; seguir(e.target); });
+    indice.addEventListener('pointerleave', esconder);
+    addEventListener('scroll', () => { if (dentroCat) seguir(document.elementFromPoint(cx, cy)); }, { passive: true });
   }
 
   /* ---------- 14 · Pestañas accesibles (sofás, series de telas, mesas) ---------- */

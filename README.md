@@ -6,16 +6,16 @@ Prototipo de homepage para **Tikal Muebles**, tienda y taller de muebles y sofá
 
 **Qué es:** su home —sus bloques, en su orden, con sus textos y sus fotos— rehecha con sus colores medidos (#0f131f, #727f9f, #35415b, #e3e7f0). Los bloques nuevos (trabajos reales, catálogo, sofás con planos y telas, mesas, nosotros, visita y presupuesto) se construyen solo con textos de sus propias páginas.
 
-**Dirección estética (v2): «De la idea al mueble».** Su lema, «Fabricamos tus ideas», hecho visible: la foto del hero llega como el boceto de una idea y una costura de luz cálida (la de sus leds) la convierte en el mueble. Con el cursor, una lupa enseña la idea debajo, sin mover la foto. Además:
+**Dirección estética (v3).** Su azul noche, la luz cálida de sus leds y una serif editorial. El hero: su lema gigante, cuya palabra final cambia al recorrer los muebles de su foto («Fabricamos tus librerías / muebles / sofás / mesas / ideas»); en escritorio, su lista de categorías se une a cada mueble con una línea de luz. Al cargar, una puerta de palillería de roble abre sus lamas y deja ver el salón. Además:
 
 - Sus etiquetas sobre la foto (librería, mueble de TV, sofá, mesa) llevan a cada bloque.
 - La intro se enciende palabra a palabra al leer; su lema corre en dos filas gigantes.
-- Un comparador idea ↔ sofá terminado sigue al cursor.
+- El sofá de «Proyectos personalizados» aparece tras dos puertas de armario lacadas que se abren hacia ti.
 - Sus trabajos reales pasan por una estantería que se desliza sola.
 - El catálogo es un índice cuya foto flota junto al cursor.
 - Los sofás pasan solos en un escenario, con su nombre gigante y su plano con medidas.
 - Las telas son un libro de muestras con lupa para ver la trama.
-- Las mesas: la foto en el centro, redonda, y sus 9 modelos girando alrededor.
+- Las mesas: la foto en el centro, en óvalo (se ve la mesa entera), y sus 9 modelos girando alrededor.
 - Nosotros: un sello de «Más de 25 años» que gira sobre su exposición.
 
 Tipografía: **Gloock** y **Manrope**. Cabecera fija, con enlaces a sus páginas reales.
