@@ -22,6 +22,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; background: radial-gradient(70% 60% at 70% 75%, rgba(53, 65, 91, .45), transparent 70%), var(--noche); color: var(--cal); font: 400 17px/1.7 'Manrope', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
   img, svg { display: block; max-width: 100%; }
+  img { height: auto; }
   .cab { padding: clamp(18px, 3svh, 28px) var(--margen) 0; }
   .cab svg { height: clamp(40px, 5svh, 56px); width: auto; fill: var(--blanco); }
   .aviso { width: 100%; max-width: calc(1180px + 2 * var(--margen)); margin-inline: auto; padding: clamp(32px, 6svh, 72px) var(--margen) clamp(40px, 7svh, 80px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(44px, 7svh, 64px); align-items: center; }
@@ -32,7 +33,7 @@
   .mas a:hover { color: var(--led); }
   .mas a:focus-visible { outline: 2px solid var(--cal); outline-offset: 3px; }
   /* La píldora de la home: al pasar, la luz cálida entra barriendo */
-  .btn { position: relative; display: inline-flex; isolation: isolate; overflow: hidden; border-radius: 999px; text-decoration: none; font: 700 16px/1.1 'Manrope', system-ui, sans-serif; transition: transform .5s var(--muelle); }
+  .btn { position: relative; display: inline-flex; isolation: isolate; overflow: hidden; border-radius: 4px; text-decoration: none; font: 600 15px/1.1 'Manrope', system-ui, sans-serif; transition: transform .5s var(--muelle); }
   .btn::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; background: var(--led); transform: scaleX(0); transform-origin: 0 50%; transition: transform .55s var(--salida); }
   .btn span { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; color: var(--noche); }
   .btn { background: var(--cal); }
@@ -43,7 +44,7 @@
   .btn:focus-visible { outline: 2px solid var(--cal); outline-offset: 4px; }
   /* La home entera en su marco: pasa despacio, de arriba abajo */
   .vitrina { justify-self: center; display: grid; justify-items: center; margin: 0; }
-  .ventana { display: block; width: min(320px, 72vw); height: var(--alto); overflow: hidden; border-radius: 12px; background: #111; box-shadow: 0 0 0 2px var(--led), 0 0 0 10px rgba(243, 217, 164, .1), 0 24px 60px -12px rgba(0, 0, 0, .7); }
+  .ventana { display: block; width: min(320px, 72vw); height: var(--alto); overflow: hidden; border-radius: 4px; background: #111; box-shadow: 0 0 0 2px var(--led), 0 0 0 10px rgba(243, 217, 164, .1), 0 24px 60px -12px rgba(0, 0, 0, .7); }
   .ventana:focus-visible { outline: 2px solid var(--cal); outline-offset: 14px; }
   figcaption { margin-top: 22px; font-size: 14.5px; color: var(--pizarra); }
   @media (min-width: 900px) { .aviso { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(48px, 6vw, 96px); } .vitrina { justify-self: end; } }
@@ -79,7 +80,7 @@
     </div>
     <figure class="vitrina">
       <span class="ventana" tabindex="0" aria-label="Miniatura de la home completa">
-        <img src="assets/img/home-entera.jpg" width="576" height="4760" alt="Miniatura de la home propuesta para Tikal Muebles, completa de arriba abajo: su salón con sus muebles señalados, el lema, los proyectos, los trabajos reales, el catálogo, los sofás y sus telas, las mesas, la experiencia del equipo y la visita a la tienda con el formulario">
+        <img src="assets/img/home-entera.jpg" width="576" height="4687" alt="Miniatura de la home propuesta para Tikal Muebles, completa de arriba abajo: su salón con su lema y, debajo, lo que fabrican; la intro, la filosofía, los proyectos, los trabajos reales, el catálogo, los sofás y sus telas, las mesas, la experiencia del equipo y la visita a la tienda con el formulario">
       </span>
       <figcaption>La propuesta de home, entera</figcaption>
     </figure>
