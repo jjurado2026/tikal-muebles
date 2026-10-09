@@ -32,21 +32,10 @@
   .mas a { color: var(--blanco); font-weight: 700; text-decoration-color: var(--led); text-underline-offset: .18em; overflow-wrap: anywhere; }
   .mas a:hover { color: var(--led); }
   .mas a:focus-visible { outline: 2px solid var(--cal); outline-offset: 3px; }
-  /* La píldora de la home: al pasar, la luz cálida entra barriendo */
-  .btn { position: relative; display: inline-flex; isolation: isolate; overflow: hidden; border-radius: 4px; text-decoration: none; font: 600 15px/1.1 'Manrope', system-ui, sans-serif; transition: transform .5s var(--muelle); }
-  .btn::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; background: var(--led); transform: scaleX(0); transform-origin: 0 50%; transition: transform .55s var(--salida); }
-  .btn span { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; color: var(--noche); }
-  .btn { background: var(--cal); }
-  .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn:hover::before { transform: scaleX(1); }
-  .btn:active { transform: scale(.96); }
-  .btn:focus-visible { outline: 2px solid var(--cal); outline-offset: 4px; }
   /* La home entera en su marco: pasa despacio, de arriba abajo */
   .vitrina { justify-self: center; display: grid; justify-items: center; margin: 0; }
   .ventana { display: block; width: min(320px, 72vw); height: var(--alto); overflow: hidden; border-radius: 4px; background: #111; box-shadow: 0 0 0 2px var(--led), 0 0 0 10px rgba(243, 217, 164, .1), 0 24px 60px -12px rgba(0, 0, 0, .7); }
   .ventana:focus-visible { outline: 2px solid var(--cal); outline-offset: 14px; }
-  figcaption { margin-top: 22px; font-size: 14.5px; color: var(--pizarra); }
   @media (min-width: 900px) { .aviso { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(48px, 6vw, 96px); } .vitrina { justify-self: end; } }
   @keyframes recorrer { 0%, 6% { transform: none; } 94%, 100% { transform: translateY(calc(-100% + var(--alto))); } }
   @keyframes entrar { from { opacity: 0; transform: translateY(18px); } }
@@ -76,13 +65,11 @@
     <div class="texto">
       <h1>No puedes ver esta página porque han pasado más de 10 días desde su envío.</h1>
       <p class="mas">Si sigues con interés, escríbeme a <a href="mailto:jjuradogarciadelrio@gmail.com?subject=Propuesta%20web%20Tikal%20Muebles">jjuradogarciadelrio<wbr>@gmail.com</a>.</p>
-      <a class="btn" href="mailto:jjuradogarciadelrio@gmail.com?subject=Propuesta%20web%20Tikal%20Muebles"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5h18v13H3z"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>Escribir un email</span></a>
     </div>
     <figure class="vitrina">
       <span class="ventana" tabindex="0" aria-label="Miniatura de la home completa">
         <img src="assets/img/home-entera.jpg" width="576" height="4687" alt="Miniatura de la home propuesta para Tikal Muebles, completa de arriba abajo: su salón con su lema y, debajo, lo que fabrican; la intro, la filosofía, los proyectos, los trabajos reales, el catálogo, los sofás y sus telas, las mesas, la experiencia del equipo y la visita a la tienda con el formulario">
       </span>
-      <figcaption>La propuesta de home, entera</figcaption>
     </figure>
   </main>
 </body>
