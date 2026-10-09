@@ -13,6 +13,10 @@
   const limitar = (v, a, b) => Math.min(b, Math.max(a, v));
   const reiniciar = (el, clase) => { el.classList.remove(clase); void el.offsetWidth; el.classList.add(clase); };
   const hero = $('[data-hero]');
+  /* el ancho útil de la ventana (sin la barra de desplazamiento): alinea el menú con el hero */
+  const anchoUtil = () => html.style.setProperty('--vp', (document.body ? document.body.clientWidth : html.clientWidth) + 'px');
+  if ('ResizeObserver' in window) new ResizeObserver(anchoUtil).observe(document.body); else addEventListener('resize', anchoUtil);
+  anchoUtil();
   const foto = $('.hero-foto', hero);
   const real = $('.hf-real', hero);
 
