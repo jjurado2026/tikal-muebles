@@ -30,6 +30,7 @@
   (function () {
     var h = document.documentElement, q = location.search;
     h.classList.add('js');
+    h.style.setProperty('--vp', h.clientWidth + 'px');
     try { var t = localStorage.getItem('tikal-tema'); if (t === 'dark' || t === 'light') h.dataset.theme = t; } catch (e) {}
     if (/[?&]ss\b/.test(q)) { h.classList.add('ss'); return; }
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { h.classList.add('quieto'); return; }
@@ -98,6 +99,7 @@
 
 <!-- ============================ CABECERA: fija; el logo en el centro; todo lleva a sus páginas ============================ -->
 <header class="cab" id="cabecera">
+  <div class="cab-in">
   <div class="cab-izq">
     <button class="cab-menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil"><span class="hamb" aria-hidden="true"><span></span></span><span class="cab-menu-txt">Menú</span></button>
     <nav class="cab-menu" aria-label="Lo que fabricamos">
@@ -121,6 +123,7 @@
     <a class="btn btn-claro btn-peq btn-presu" href="#contacto"><span>Presupuesto</span></a>
     <nav class="idioma" aria-label="Idioma"><a href="#inicio" aria-current="page" lang="es">ES</a><a href="https://tikalmuebles.com/en/" lang="en" hreflang="en">EN</a></nav>
     <button class="tema tema-ic" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg class="ic ic-sol" aria-hidden="true"><use href="#i-sol"/></svg><svg class="ic ic-luna" aria-hidden="true"><use href="#i-luna"/></svg></button>
+  </div>
   </div>
 </header>
 
@@ -178,55 +181,6 @@
         <li class="a" style="--d:6"><a class="hc" href="#catalogo-muebles" data-cat="muebles"><span class="hc-foto"><img src="assets/img/cat-muebles-medida-640.webp" width="640" height="360" alt="" decoding="async"></span><span class="hc-nombre">Muebles a medida</span></a></li>
       </ul>
     </div>
-  </section>
-
-  <!-- ============================ 2 · CATÁLOGO, justo tras el hero: un índice; la foto de cada categoría sigue al cursor ============================ -->
-  <section class="catalogo" id="catalogo" aria-labelledby="t-catalogo">
-    <div class="envoltura">
-      <div class="catalogo-cabeza revelar">
-        <h2 class="titular" id="t-catalogo"><span class="linea"><span>Catálogo<svg class="ic cat-titulo-ic" aria-hidden="true" focusable="false"><use href="#i-catalogo"/></svg></span></span></h2>
-        <p class="entrada sube" style="--d:1">Descubre nuestra cuidada selección de muebles, donde encontrarás piezas que combinan funcionalidad y belleza.</p>
-      </div>
-      <ul class="indice">
-        <li class="cat" id="catalogo-librerias" data-foto-cat="assets/img/cat-librerias-960.webp">
-          <button class="cat-fila" type="button" data-abrir-visor="librerias">
-            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-libreria"/></svg>
-            <span class="cat-nombre">Librerías</span>
-            <span class="cat-frase">Al poder elegir entre diversas medidas, composiciones y acabados, nuestras librerías se adaptan perfectamente a tus gustos y necesidades.</span>
-            <span class="cat-ir">Ver librerías</span>
-          </button>
-          <img class="cat-movil" data-foto src="assets/img/cat-librerias-480.webp" width="480" height="640" alt="Librería a medida" loading="lazy" decoding="async">
-        </li>
-        <li class="cat" id="catalogo-mesas" data-foto-cat="assets/img/cat-mesas-cruceta-1280.webp">
-          <a class="cat-fila" href="#mesas">
-            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-mesa"/></svg>
-            <span class="cat-nombre">Mesas</span>
-            <span class="cat-frase">Te ofrecemos una cuidada selección de mesas fabricadas a medida y totalmente personalizadas.</span>
-            <span class="cat-ir">Ver mesas</span>
-          </a>
-          <img class="cat-movil" data-foto src="assets/img/cat-mesas-cruceta-640.webp" width="640" height="360" alt="Mesa Mod. Cruceta con cantos redondeados" loading="lazy" decoding="async">
-        </li>
-        <li class="cat" id="catalogo-sofas" data-foto-cat="assets/img/sofa-romeo-1280.webp">
-          <a class="cat-fila" href="#sofas">
-            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-sofa"/></svg>
-            <span class="cat-nombre">Sofás</span>
-            <span class="cat-frase">Fabricamos sofás a medida con tejidos antimanchas, creando piezas únicas de estilo atemporal.</span>
-            <span class="cat-ir">Ver sofás</span>
-          </a>
-          <img class="cat-movil" data-foto src="assets/img/sofa-romeo-640.webp" width="640" height="506" alt="Sofá Romeo" loading="lazy" decoding="async">
-        </li>
-        <li class="cat" id="catalogo-muebles" data-foto-cat="assets/img/cat-muebles-medida-1280.webp">
-          <button class="cat-fila" type="button" data-abrir-visor="muebles">
-            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-medida"/></svg>
-            <span class="cat-nombre">Muebles a medida</span>
-            <span class="cat-frase">Creamos librerías, muebles de TV, armarios, mesas de comedor, escritorios y muebles auxiliares totalmente personalizados en medidas, colores, materiales y distribución.</span>
-            <span class="cat-ir">Ver muebles a medida</span>
-          </button>
-          <img class="cat-movil" data-foto src="assets/img/cat-muebles-medida-640.webp" width="640" height="360" alt="Mueble lacado en blanco con puertas de cristal y base lacada para altavoces" loading="lazy" decoding="async">
-        </li>
-      </ul>
-    </div>
-    <div class="flotador" aria-hidden="true"><div class="flotador-in"><img alt="" width="640" height="480"></div></div>
   </section>
 
   <!-- ============================ 2 · INTRO (su bloque 2): las palabras se encienden al leer ============================ -->
@@ -302,6 +256,55 @@
         <a class="btn btn-hueco" href="#contacto"><span>Solicita presupuesto</span></a>
       </div>
     </div>
+  </section>
+
+  <!-- ============================ 6 · CATÁLOGO: un índice; la foto de cada categoría sigue al cursor ============================ -->
+  <section class="catalogo" id="catalogo" aria-labelledby="t-catalogo">
+    <div class="envoltura">
+      <div class="catalogo-cabeza revelar">
+        <h2 class="titular" id="t-catalogo"><span class="linea"><span>Catálogo<svg class="ic cat-titulo-ic" aria-hidden="true" focusable="false"><use href="#i-catalogo"/></svg></span></span></h2>
+        <p class="entrada sube" style="--d:1">Descubre nuestra cuidada selección de muebles, donde encontrarás piezas que combinan funcionalidad y belleza.</p>
+      </div>
+      <ul class="indice">
+        <li class="cat" id="catalogo-librerias" data-foto-cat="assets/img/cat-librerias-960.webp">
+          <button class="cat-fila" type="button" data-abrir-visor="librerias">
+            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-libreria"/></svg>
+            <span class="cat-nombre">Librerías</span>
+            <span class="cat-frase">Al poder elegir entre diversas medidas, composiciones y acabados, nuestras librerías se adaptan perfectamente a tus gustos y necesidades.</span>
+            <span class="cat-ir">Ver librerías</span>
+          </button>
+          <img class="cat-movil" data-foto src="assets/img/cat-librerias-480.webp" width="480" height="640" alt="Librería a medida" loading="lazy" decoding="async">
+        </li>
+        <li class="cat" id="catalogo-mesas" data-foto-cat="assets/img/cat-mesas-cruceta-1280.webp">
+          <a class="cat-fila" href="#mesas">
+            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-mesa"/></svg>
+            <span class="cat-nombre">Mesas</span>
+            <span class="cat-frase">Te ofrecemos una cuidada selección de mesas fabricadas a medida y totalmente personalizadas.</span>
+            <span class="cat-ir">Ver mesas</span>
+          </a>
+          <img class="cat-movil" data-foto src="assets/img/cat-mesas-cruceta-640.webp" width="640" height="360" alt="Mesa Mod. Cruceta con cantos redondeados" loading="lazy" decoding="async">
+        </li>
+        <li class="cat" id="catalogo-sofas" data-foto-cat="assets/img/sofa-romeo-1280.webp">
+          <a class="cat-fila" href="#sofas">
+            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-sofa"/></svg>
+            <span class="cat-nombre">Sofás</span>
+            <span class="cat-frase">Fabricamos sofás a medida con tejidos antimanchas, creando piezas únicas de estilo atemporal.</span>
+            <span class="cat-ir">Ver sofás</span>
+          </a>
+          <img class="cat-movil" data-foto src="assets/img/sofa-romeo-640.webp" width="640" height="506" alt="Sofá Romeo" loading="lazy" decoding="async">
+        </li>
+        <li class="cat" id="catalogo-muebles" data-foto-cat="assets/img/cat-muebles-medida-1280.webp">
+          <button class="cat-fila" type="button" data-abrir-visor="muebles">
+            <svg class="ic cat-ic" aria-hidden="true"><use href="#i-medida"/></svg>
+            <span class="cat-nombre">Muebles a medida</span>
+            <span class="cat-frase">Creamos librerías, muebles de TV, armarios, mesas de comedor, escritorios y muebles auxiliares totalmente personalizados en medidas, colores, materiales y distribución.</span>
+            <span class="cat-ir">Ver muebles a medida</span>
+          </button>
+          <img class="cat-movil" data-foto src="assets/img/cat-muebles-medida-640.webp" width="640" height="360" alt="Mueble lacado en blanco con puertas de cristal y base lacada para altavoces" loading="lazy" decoding="async">
+        </li>
+      </ul>
+    </div>
+    <div class="flotador" aria-hidden="true"><div class="flotador-in"><img alt="" width="640" height="480"></div></div>
   </section>
 
   <!-- ============================ 7 · SOFÁS: el escenario de sus seis modelos ============================ -->

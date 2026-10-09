@@ -59,6 +59,20 @@
 @media (min-width: 2400px) { :root { --cab-h: 100px; --ancho: 1680px; } }
 @media (max-height: 500px) and (orientation: landscape) { :root { --cab-h: 52px; } }
 
+/* Medidas del hero, compartidas con la cabecera: el menú empieza donde empieza la foto
+   y termina donde termina el hero. --vp es el ancho útil de la ventana (lo pone el
+   primer script, sin la barra de desplazamiento). */
+:root { --vp: 100vw; --h-alto: calc(100vh - var(--cab-h)); --h-hp: clamp(14px, 2.6vh, 40px); }
+@supports (height: 100svh) { :root { --h-alto: calc(100svh - var(--cab-h)); --h-hp: clamp(14px, 2.6svh, 40px); } }
+@media (min-width: 900px) and (min-aspect-ratio: 4/3) and (min-height: 501px) {
+  :root {
+    --h-col: clamp(280px, 26vw, 520px); --h-gap: clamp(32px, 3.6vw, 72px); --h-gapv: clamp(16px, 2.6vh, 36px); --h-tira: clamp(96px, 13.5vh, 156px);
+    --h-fw: min(var(--vp) - 2 * var(--margen) - var(--h-col) - var(--h-gap), (var(--h-alto) - 2 * var(--h-hp) - var(--h-tira) - var(--h-gapv)) * 1.5);
+    --h-ancho: calc(var(--h-fw) + var(--h-gap) + var(--h-col));
+  }
+}
+@media (min-width: 900px) and (min-aspect-ratio: 4/3) and (min-height: 501px) and (max-height: 640px) { :root { --h-tira: 86px; } }
+
 :root[data-theme="dark"] {
   --s-niebla: #10141f; --s-cal: #171c2b; --s-carta: #1e2435;
   --t-fuerte: var(--blanco); --t-texto: #e8ebf2; --t-suave: #b3bbcf; --borde: rgba(163, 172, 196, .2);
@@ -67,7 +81,7 @@
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--cab-h) + 12px); }
+html { scrollbar-gutter: stable; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--cab-h) + 12px); }
 body { margin: 0; padding-top: var(--cab-h); background: var(--s-niebla); color: var(--t-texto); font: 400 17px/1.7 var(--f-texto); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img, svg { display: block; max-width: 100%; }
 img { height: auto; }
@@ -137,12 +151,13 @@ input, select, textarea { font: inherit; color: inherit; }
    ===================================================================== */
 .cab {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: var(--cab-h);
-  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; column-gap: clamp(12px, 2.4vw, 48px);
   padding: 0 var(--margen);
   background: rgba(15, 19, 31, .92); color: var(--cal);
   -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
   box-shadow: 0 1px 0 rgba(227, 231, 240, .07);
 }
+/* la caja del menú mide lo mismo que el hero y está centrada como él */
+.cab-in { width: min(100%, var(--h-ancho, 100%)); height: 100%; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; column-gap: clamp(12px, 2.4vw, 48px); }
 .cab-izq { justify-self: start; display: flex; align-items: center; min-width: 0; }
 .cab-der { justify-self: end; display: flex; align-items: center; gap: clamp(4px, .8vw, 14px); min-width: 0; }
 .cab-logo { justify-self: center; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border-radius: 4px; }
@@ -209,6 +224,8 @@ input, select, textarea { font: inherit; color: inherit; }
   .cab-menu-btn { display: none; }
 }
 @media (min-width: 1600px) { .cab-tel-txt { display: inline; } }
+@media (max-width: 699px), (max-height: 500px) { .cab-tel { margin-right: -12px; } }
+@media (min-width: 1200px) { .tema-ic { margin-right: -12.5px; } }
 
 /* Menú móvil: a pantalla completa, enlaces grandes que entran uno a uno */
 .menu-movil { position: fixed; z-index: 45; inset: var(--cab-h) 0 0; overflow-y: auto; overscroll-behavior: contain; padding: clamp(20px, 5svh, 48px) var(--margen) calc(28px + env(safe-area-inset-bottom)); background: var(--noche); color: var(--cal); visibility: hidden; opacity: 0; transition: opacity .3s ease, visibility 0s .3s; }
