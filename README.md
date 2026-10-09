@@ -41,7 +41,7 @@ Parámetros para revisar:
 - `?caducada`: muestra el aviso.
 
 ## Caducidad
-La propuesta se ve hasta el **16 de octubre de 2026** (hora de Madrid). Desde el 17, `index.html` lleva a `caducada.html`: el aviso, el correo de contacto y la home entera en miniatura. La fecha está en el primer `<script>` de `index.html`. En local no caduca.
+La propuesta se ve hasta el **19 de octubre de 2026** incluido (10 días desde su envío, el 9 de octubre; hora de Madrid). Desde el 20, `index.html` lleva a `caducada.html`: el aviso, el correo de contacto y la home entera en miniatura. La fecha está en el primer `<script>` de `index.html`. En local no caduca.
 
 ## Stack
 HTML, CSS y JavaScript puro. Cero dependencias, cero build. Fuentes autoalojadas e imágenes del cliente en WebP/AVIF con `srcset`.

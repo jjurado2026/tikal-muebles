@@ -15,10 +15,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f131f'/%3E%3Cpath d='M10 7h12v3H10zM13 10h6v4h-6zM8 16h16v2H8zM6 20h20v2H6zM4 24h24v3H4z' fill='%23fff'/%3E%3C/svg%3E">
 
 <script>
-  /* La propuesta se ve 10 días desde su envío: desde el 17 de octubre de 2026 a las 00:00 de Madrid,
-     el aviso de caducada. En local no caduca; ?caducada lo simula. */
+  /* La propuesta se ve 10 días desde su envío (9 de octubre de 2026): hasta el 19 de octubre incluido.
+     Desde el 20 de octubre a las 00:00 de Madrid, el aviso de caducada. En local no caduca; ?caducada lo simula. */
   (function () {
-    var fin = Date.UTC(2026, 9, 16, 22, 0);
+    var fin = Date.UTC(2026, 9, 19, 22, 0);
     if (/[?&]caducada\b/.test(location.search) || (/github\.io$/.test(location.hostname) && Date.now() >= fin)) {
       document.documentElement.style.display = 'none';
       location.replace('caducada.html');
